@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply from  : '../dependencies.gradle'
 
 android {
     compileSdkVersion 28
@@ -18,18 +18,37 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            resValue "string", "TMDbApiKey", "ed5e7f6f96b248cf13efb41458ee4986"
+            resValue "string", "serverAdderss", "https://api.themoviedb.org/3/"
+        }
+        debug {
+            applicationIdSuffix ".debug"
+            debuggable true
+            resValue "string", "TMDbApiKey", "ed5e7f6f96b248cf13efb41458ee4986"
+            resValue "string", "serverAdderss", "https://api.themoviedb.org/3/"
         }
     }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.core:core-ktx:1.0.2'
-    implementation 'com.google.android.material:material:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation kotlinDependencies.values()
+    implementation coreAndroidDependencies.values()
+
+    implementation lifecycleDependencies.values()
+    annotationProcessor lifecycleDependenciesAnatation.values()
+
+    implementation retrofitDependencies.values()
+
+    implementation roomDependencies.values()
+    kapt roomCompilerDependency.values()
+
+    implementation rxjavaDependencies.values()
+
+    implementation daggerDependencies.values()
+    kapt daggerDependenciesAnnotation.values()
+
+    testImplementation juntDependencies.values()
+    androidTestImplementation androidTestDependencies.values()
 }

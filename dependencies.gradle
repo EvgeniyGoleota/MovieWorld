@@ -1,0 +1,84 @@
+ext {
+    def kotlin = "1.3.41"
+    def material = "1.0.0"
+    def appcompat = "1.0.2"
+    def constraintLayout = "1.1.3"
+
+    def dagger2 = "2.16"
+
+    def lifecycle = "1.1.1"
+
+    def gson = "2.8.5"
+    def retrofit = "2.4.0"
+
+    def room = "1.1.1"
+
+    def rxjava = "2.1.12"
+    def rxandroid = "2.0.2"
+
+    def junit_version = "4.12"
+    def runner_version = "1.0.2"
+    def espresso_core_version = "3.0.2"
+
+    kotlinDependencies = [
+            stdlib: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin}"
+    ]
+
+    coreAndroidDependencies = [
+            material        : "com.google.android.material:material:${material}",
+            appcompat       : "androidx.appcompat:appcompat:${appcompat}",
+            core            : "androidx.core:core-ktx:${appcompat}",
+            design          : "com.android.support:design:${appcompat}",
+            constraintlayout: "androidx.constraintlayout:constraintlayout:${constraintLayout}",
+            recyclerview    : "com.android.support:recyclerview-v7:${appcompat}"
+    ]
+
+    lifecycleDependencies = [
+            lifecycle: "android.arch.lifecycle:extensions:${lifecycle}"
+    ]
+
+    lifecycleDependenciesAnatation = [
+            compiler: "android.arch.lifecycle:compiler:${lifecycle}"
+    ]
+
+    retrofitDependencies = [
+            gson         : "com.google.code.gson:gson:${gson}",
+            retrofit     : "com.squareup.retrofit2:retrofit:${retrofit}",
+            gsonconverter: "com.squareup.retrofit2:converter-gson:${retrofit}"
+    ]
+
+    roomDependencies = [
+            room: "android.arch.persistence.room:runtime:${room}"
+    ]
+
+    roomCompilerDependency = [
+            compiler: "android.arch.persistence.room:compiler:${room}"
+    ]
+
+    rxjavaDependencies = [
+            rxjava   : "io.reactivex.rxjava2:rxjava:${rxjava}",
+            rxandroid: "io.reactivex.rxjava2:rxandroid:${rxandroid}",
+            adapter  : "com.squareup.retrofit2:adapter-rxjava2:2.3.0"
+    ]
+
+    daggerDependencies = [
+            dagger              : "com.google.dagger:dagger:${dagger2}",
+            daggerAndroid       : "com.google.dagger:dagger-android:${dagger2}",
+            daggerAndroidSupport: "com.google.dagger:dagger-android-support:${dagger2}"
+    ]
+
+    daggerDependenciesAnnotation = [
+            compiler : "com.google.dagger:dagger-compiler:${dagger2}",
+            processor: "com.google.dagger:dagger-android-processor:${dagger2}",
+            support  : "com.google.dagger:dagger-android-support:${dagger2}"
+    ]
+
+    juntDependencies = [
+            junit: "junit:junit:${junit_version}"
+    ]
+
+    androidTestDependencies = [
+            runner  : "com.android.support.test:runner:${runner_version}",
+            espresso: "com.android.support.test.espresso:espresso-core:${espresso_core_version}",
+    ]
+}

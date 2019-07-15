@@ -1,11 +1,17 @@
-package com.escorp.movieworld
+package com.escorp.movieworld.activities
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.TextView
+import com.escorp.movieworld.Application
+import com.escorp.movieworld.R
 
 class MainActivity : AppCompatActivity() {
+
+    init {
+        Application.getApplicationComponent().inject(this)
+    }
 
     private lateinit var textMessage: TextView
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -16,10 +22,6 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.navigation_dashboard -> {
                 textMessage.setText(R.string.title_dashboard)
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_notifications -> {
-                textMessage.setText(R.string.title_notifications)
                 return@OnNavigationItemSelectedListener true
             }
         }
