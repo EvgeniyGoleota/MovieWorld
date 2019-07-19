@@ -3,8 +3,9 @@ ext {
     def material = "1.0.0"
     def appcompat = "1.0.2"
     def constraintLayout = "1.1.3"
+    def androidxfragment = "1.2.0-alpha01"
 
-    def dagger2 = "2.16"
+    def dagger2 = "2.23.2"
 
     def lifecycle = "1.1.1"
 
@@ -30,7 +31,8 @@ ext {
             core            : "androidx.core:core-ktx:${appcompat}",
             design          : "com.android.support:design:${appcompat}",
             constraintlayout: "androidx.constraintlayout:constraintlayout:${constraintLayout}",
-            recyclerview    : "com.android.support:recyclerview-v7:${appcompat}"
+            recyclerview    : "com.android.support:recyclerview-v7:${appcompat}",
+            androidxfragment: "androidx.fragment:fragment-ktx:${androidxfragment}"
     ]
 
     lifecycleDependencies = [
