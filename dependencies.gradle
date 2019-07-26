@@ -11,6 +11,7 @@ ext {
 
     def gson = "2.8.5"
     def retrofit = "2.4.0"
+    def loggingInterseptor = "3.9.1"
 
     def room = "1.1.1"
 
@@ -46,7 +47,9 @@ ext {
     retrofitDependencies = [
             gson         : "com.google.code.gson:gson:${gson}",
             retrofit     : "com.squareup.retrofit2:retrofit:${retrofit}",
-            gsonconverter: "com.squareup.retrofit2:converter-gson:${retrofit}"
+            gsonconverter: "com.squareup.retrofit2:converter-gson:${retrofit}",
+            gsonadapter  : "com.squareup.retrofit2:adapter-rxjava2:${retrofit}",
+            interseptor  : "com.squareup.okhttp3:logging-interceptor:${loggingInterseptor}"
     ]
 
     roomDependencies = [

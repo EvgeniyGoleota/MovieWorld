@@ -1,23 +1,27 @@
 package com.escorp.movieworld
 
+import android.app.Activity
 import android.app.Application
-import com.escorp.movieworld.dagger.Components.AppComponent
-import com.escorp.movieworld.dagger.Components.DaggerAppComponent
-import com.escorp.movieworld.dagger.modules.AppModule
-import com.escorp.movieworld.dagger.modules.NetworkModule
+import com.escorp.movieworld.di.Components.DaggerAppComponent
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasActivityInjector
+import javax.inject.Inject
 
-class Application : Application() {
+class Application : Application(), HasActivityInjector {
 
-    companion object {
-        private lateinit var appComponent: AppComponent
-        fun getApplicationComponent() = appComponent
-    }
+    @Inject
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
 
     override fun onCreate() {
         super.onCreate()
-        appComponent = DaggerAppComponent.builder()
-            .appModule(AppModule(this))
-            .networkModule(NetworkModule())
+        DaggerAppComponent.builder()
+            .application(this)
             .build()
+            .inject(this)
+    }
+
+    override fun activityInjector(): AndroidInjector<Activity> {
+        return dispatchingAndroidInjector
     }
 }

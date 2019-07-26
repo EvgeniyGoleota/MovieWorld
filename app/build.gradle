@@ -28,6 +28,10 @@ android {
             resValue "string", "serverAdderss", "https://api.themoviedb.org/3/"
         }
     }
+
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
