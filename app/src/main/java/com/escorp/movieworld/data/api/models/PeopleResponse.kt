@@ -2,10 +2,10 @@ package com.escorp.movieworld.data.api.models
 
 import com.google.gson.annotations.SerializedName
 
-data class MovieResponse(
+data class PeopleResponse(
     val page: Long,
 
-    val results: List<Movie>,
+    val results: List<People>,
 
     @SerializedName("total_results")
     val totalResults: Long,

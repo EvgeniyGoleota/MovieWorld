@@ -18,6 +18,8 @@ ext {
     def rxjava = "2.1.12"
     def rxandroid = "2.0.2"
 
+    def picasso = "2.71828"
+
     def junit_version = "4.12"
     def runner_version = "1.0.2"
     def espresso_core_version = "3.0.2"
@@ -37,7 +39,8 @@ ext {
     ]
 
     lifecycleDependencies = [
-            lifecycle: "android.arch.lifecycle:extensions:${lifecycle}"
+            lifecycle      : "android.arch.lifecycle:extensions:${lifecycle}",
+            reactivestreams: "android.arch.lifecycle:reactivestreams:${lifecycle}"
     ]
 
     lifecycleDependenciesAnatation = [
@@ -76,6 +79,10 @@ ext {
             compiler : "com.google.dagger:dagger-compiler:${dagger2}",
             processor: "com.google.dagger:dagger-android-processor:${dagger2}",
             support  : "com.google.dagger:dagger-android-support:${dagger2}"
+    ]
+
+    picassoDependencies = [
+            picasso: "com.squareup.picasso:picasso:$picasso"
     ]
 
     juntDependencies = [

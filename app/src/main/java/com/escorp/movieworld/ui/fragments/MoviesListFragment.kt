@@ -9,24 +9,18 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.escorp.movieworld.databinding.FragmentRecyclerViewBinding
-import com.escorp.movieworld.ui.adapters.ActorsListAdapter
-import com.escorp.movieworld.ui.viewmodel.ActorsListViewModel
+import com.escorp.movieworld.ui.viewmodel.MoviesListViewModel
 import dagger.android.support.AndroidSupportInjection
-import kotlinx.android.synthetic.main.fragment_recycler_view.*
 import javax.inject.Inject
 
-class ActorsListFragment : Fragment() {
+class MoviesListFragment : Fragment() {
 
     @Inject
     internal lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    @Inject
-    internal lateinit var actorListAdapter: ActorsListAdapter
-
     private lateinit var binding: FragmentRecyclerViewBinding
-    private lateinit var viewModel: ActorsListViewModel
+    private lateinit var viewModel: MoviesListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,22 +35,13 @@ class ActorsListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initializeView()
-    }
-
-    private fun initializeView() {
-        recycler_view.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = actorListAdapter
-        }
     }
 
     private fun initializeViewModel() {
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(ActorsListViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(MoviesListViewModel::class.java)
 
-        viewModel.getActorList().observe(this, Observer { actorList ->
-            Log.d("MW:::", "Actor list size ${actorList.size}")
-            actorListAdapter.setItems(actorList)
+        viewModel.getListOfTopRatedMovies().observe(this, Observer { movieList ->
+            Log.d("MW:::", "Movies list size ${movieList.size}")
         })
     }
 }

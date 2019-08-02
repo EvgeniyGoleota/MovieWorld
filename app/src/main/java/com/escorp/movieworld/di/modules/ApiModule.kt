@@ -1,17 +1,18 @@
 package com.escorp.movieworld.di.modules
 
-import android.content.Context
 import com.escorp.movieworld.Application
 import com.escorp.movieworld.R
 import com.escorp.movieworld.data.api.MovieApi
-import com.escorp.movieworld.data.api.RequestInterseptor
+import com.escorp.movieworld.data.api.RequestInterceptor
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import io.reactivex.schedulers.Schedulers
 import okhttp3.Cache
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -44,23 +45,24 @@ class ApiModule {
         val httpClient = OkHttpClient.Builder().apply {
             cache(cache)
             addInterceptor(logging)
-            addNetworkInterceptor(RequestInterseptor(application.getString(R.string.TMDbApiKey)))
-            connectTimeout(30, TimeUnit.MILLISECONDS)
-            readTimeout(30, TimeUnit.MILLISECONDS)
+            addNetworkInterceptor(RequestInterceptor(application.getString(R.string.TMDbApiKey)))
+            connectTimeout(30, TimeUnit.SECONDS)
+            readTimeout(30, TimeUnit.SECONDS)
         }
-
         return httpClient.build()
     }
 
     @Provides
     @Singleton
-    internal fun providesRetrofit(gson: Gson, okHttpClient: OkHttpClient, context: Context): Retrofit =
-        Retrofit.Builder()
+    internal fun providesRetrofit(gson: Gson, okHttpClient: OkHttpClient, context: Application): Retrofit {
+        val builder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
             .baseUrl(context.getString(R.string.serverAdderss))
             .client(okHttpClient)
-            .build()
+
+            return builder.build()
+    }
 
     @Provides
     @Singleton

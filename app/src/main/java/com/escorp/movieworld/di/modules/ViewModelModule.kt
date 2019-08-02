@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.escorp.movieworld.di.annotation.ViewModelMapKey
 import com.escorp.movieworld.ui.viewmodel.ActorsListViewModel
+import com.escorp.movieworld.ui.viewmodel.MoviesListViewModel
 import com.escorp.movieworld.ui.viewmodel.factory.ViewModelFactory
 import dagger.Binds
 import dagger.Module
@@ -19,4 +20,9 @@ internal abstract class ViewModelModule {
     @IntoMap
     @ViewModelMapKey(ActorsListViewModel::class)
     protected abstract fun actorsListViewModel(actorsListViewModel: ActorsListViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelMapKey(MoviesListViewModel::class)
+    protected abstract fun moviesListViewModel(moviesListViewModel: MoviesListViewModel): ViewModel
 }

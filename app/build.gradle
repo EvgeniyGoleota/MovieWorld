@@ -53,6 +53,8 @@ dependencies {
     implementation daggerDependencies.values()
     kapt daggerDependenciesAnnotation.values()
 
+    implementation picassoDependencies.values()
+
     testImplementation juntDependencies.values()
     androidTestImplementation androidTestDependencies.values()
 }
