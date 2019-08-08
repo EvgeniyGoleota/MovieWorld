@@ -6,5 +6,5 @@ import javax.inject.Inject
 
 class ActorsListViewModel @Inject constructor(private val dataRepository: DataRepository) : ViewModel() {
 
-    fun getActorList() = dataRepository.getPopularPeople()
+//    fun getActorList() = dataRepository.getPopularPeople()
 }

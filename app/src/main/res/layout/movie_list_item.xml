@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="actor" type="com.escorp.movieworld.data.api.models.Actor"/>
+        <variable name="movie" type="com.escorp.movieworld.data.api.models.Movie"/>
     </data>
 
     <LinearLayout
@@ -18,7 +18,7 @@
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
                 android:adjustViewBounds="true"
-                app:imageUrl="@{actor.getFormattedPosterPath()}"
+                app:imageUrl="@{movie.getFormattedPosterPath()}"
                 app:placeholder="@{@drawable/ic_placeholder}"/>
 
         <TextView
@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:text="@{actor.name}"/>
+                android:text="@{movie.originalTitle}"/>
 
     </LinearLayout>
 </layout>

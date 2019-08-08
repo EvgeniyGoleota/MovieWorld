@@ -20,6 +20,10 @@ ext {
 
     def picasso = "2.71828"
 
+    def paginate = "0.5.1"
+
+    def paging = "2.1.0"
+
     def junit_version = "4.12"
     def runner_version = "1.0.2"
     def espresso_core_version = "3.0.2"
@@ -85,12 +89,21 @@ ext {
             picasso: "com.squareup.picasso:picasso:$picasso"
     ]
 
+    paginateDependencies = [
+            paginate: "com.github.markomilos:paginate:$paginate"
+    ]
+
+    pagingDependencies = [
+            paging: "androidx.paging:paging-runtime:$paging"
+    ]
+
     juntDependencies = [
-            junit: "junit:junit:${junit_version}"
+            junit: "junit:junit:${junit_version}",
+            paging:   "androidx.paging:paging-common:$paging"
     ]
 
     androidTestDependencies = [
             runner  : "com.android.support.test:runner:${runner_version}",
-            espresso: "com.android.support.test.espresso:espresso-core:${espresso_core_version}",
+            espresso: "com.android.support.test.espresso:espresso-core:${espresso_core_version}"
     ]
 }

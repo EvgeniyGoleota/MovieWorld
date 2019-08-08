@@ -8,7 +8,7 @@ data class Movie(
     val id: Long,
 
     @SerializedName(value = "header", alternate = ["title", "name"])
-    val header: String,
+    val header: String?,
 
     @SerializedName("poster_path")
     var posterPath: String?,
@@ -20,19 +20,19 @@ data class Movie(
     var releaseDate: String?,
 
     @SerializedName("original_title")
-    var originalTitle: String,
+    var originalTitle: String?,
 
     @SerializedName("genre_ids")
-    var genreIds: List<Int>,
+    var genreIds: List<Int>?,
 
     @SerializedName("original_language")
-    var originalLanguage: String,
+    var originalLanguage: String?,
 
     @SerializedName("media_type")
-    var mediaType: String,
+    var mediaType: String?,
 
     @SerializedName("runtime")
-    var runTime: Long,
+    var runTime: Long?,
 
     var status: String?,
 
@@ -41,17 +41,17 @@ data class Movie(
     @SerializedName("vote_count")
     var voteCount: Int?,
 
-    var video: Boolean,
+    var video: Boolean?,
 
     @SerializedName("vote_average")
-    var voteAverage: Double,
+    var voteAverage: Double?,
 
 //----------------------------------------------------For tv media type-------------------------------------------------
     @SerializedName("first_air_date")
-    var firstAirDate: String,
+    var firstAirDate: String?,
 
     @SerializedName("origin_country")
-    var originCountry: List<String>
+    var originCountry: List<String>?
 ) {
     fun getFormattedPosterPath(): String? {
         if (posterPath != null && !posterPath!!.startsWith("http")) {

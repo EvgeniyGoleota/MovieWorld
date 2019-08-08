@@ -2,10 +2,10 @@ package com.escorp.movieworld.data.api.models
 
 import com.google.gson.annotations.SerializedName
 
-data class PeopleResponse(
+data class ActorResponse(
     val page: Long,
 
-    val results: List<People>,
+    val results: List<Actor>,
 
     @SerializedName("total_results")
     val totalResults: Long,
@@ -13,5 +13,7 @@ data class PeopleResponse(
     @SerializedName("total_pages")
     val totalPages: Long
 ) {
-    constructor(): this(0, emptyList(), 0, 0)
+    constructor(): this(-1, emptyList(), -1, -1)
+
+    fun isSuccessful() = results.isNotEmpty()
 }

@@ -4,18 +4,18 @@ import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 
 @Entity(primaryKeys = ["id"])
-data class People(
+data class Actor(
     val id: Int,
 
     @SerializedName("profile_path")
     var profilePath: String?,
 
-    var name: String,
+    var name: String?,
 
-    var popularity: Double,
+    var popularity: Double?,
 
     @SerializedName("known_for")
-    var knownFor: List<Movie>
+    var knownFor: List<Movie>?
 ) {
     fun getFormattedPosterPath(): String? {
         if (profilePath != null && !profilePath!!.startsWith("http")) {
