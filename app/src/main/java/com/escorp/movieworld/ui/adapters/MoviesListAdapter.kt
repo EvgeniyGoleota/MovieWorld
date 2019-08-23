@@ -27,9 +27,7 @@ class MoviesListAdapter : PagedListAdapter<Movie, MoviesListAdapter.ViewHolder>(
 
     class ViewHolder(private val binding: MovieListItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bindTo(movie: Movie?) {
-            movie?.let {
-                binding.movie = movie
-            }
+            movie?.let { binding.movie = movie }
         }
     }
 }

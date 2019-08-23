@@ -15,11 +15,12 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.escorp.movieworld.databinding.FragmentRecyclerViewBinding
 import com.escorp.movieworld.ui.adapters.ActorsListAdapter
 import com.escorp.movieworld.ui.viewmodel.ActorsListViewModel
+import com.paginate.Paginate
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_recycler_view.*
 import javax.inject.Inject
 
-class ActorsListFragment : Fragment() {
+class ActorsListFragment : Fragment(), Paginate.Callbacks {
 
     @Inject
     internal lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -29,6 +30,10 @@ class ActorsListFragment : Fragment() {
 
     private lateinit var binding: FragmentRecyclerViewBinding
     private lateinit var viewModel: ActorsListViewModel
+
+    private var page = 1
+    private var isLoading = false
+    private var hasLoadedAllItems = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,17 +53,29 @@ class ActorsListFragment : Fragment() {
 
     private fun initializeView() {
         recycler_view.apply {
-            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            layoutManager = LinearLayoutManager(context)
+//            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = actorListAdapter
         }
+        Paginate.with(recycler_view, this).build()
     }
 
     private fun initializeViewModel() {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(ActorsListViewModel::class.java)
-
-//        viewModel.getActorList().observe(this, Observer { actorList ->
-//            Log.d("MW:::", "Actor list size ${actorList.size}")
-//            actorListAdapter.setItems(actorList)
-//        })
+        viewModel.pagedActorsListLiveData.observe(this, Observer { actorListAdapter.submitList(it) })
     }
+
+    override fun onLoadMore() {
+        if (!isLoading) {
+            isLoading = true
+            viewModel.retrievePopularPeople(page++).observe(this, Observer { response ->
+                isLoading = false
+                if (response.isSuccessful) hasLoadedAllItems = response.page == response.totalPages
+            })
+        }
+    }
+
+    override fun isLoading(): Boolean = isLoading
+
+    override fun hasLoadedAllItems(): Boolean = hasLoadedAllItems
 }

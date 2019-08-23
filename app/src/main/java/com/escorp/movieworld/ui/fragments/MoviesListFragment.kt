@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.escorp.movieworld.databinding.FragmentRecyclerViewBinding
 import com.escorp.movieworld.ui.adapters.MoviesListAdapter
@@ -51,7 +52,8 @@ class MoviesListFragment : Fragment(), Paginate.Callbacks {
 
     private fun initializeView() {
         recycler_view.apply {
-            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            layoutManager = LinearLayoutManager(context)
+//            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = movieListAdapter
         }
         Paginate.with(recycler_view, this).build()
@@ -59,10 +61,7 @@ class MoviesListFragment : Fragment(), Paginate.Callbacks {
 
     private fun initializeViewModel() {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(MoviesListViewModel::class.java)
-
-        viewModel.pagedMoviesListLiveData.observe(this, Observer {
-            movieListAdapter.submitList(it)
-        })
+        viewModel.pagedMoviesListLiveData.observe(this, Observer { movieListAdapter.submitList(it) })
     }
 
     override fun onLoadMore() {

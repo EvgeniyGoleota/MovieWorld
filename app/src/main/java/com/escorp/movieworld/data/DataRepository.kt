@@ -25,7 +25,8 @@ class DataRepository(private val movieApi: MovieApi, private val databaseDao: Da
             .onErrorReturnItem(MovieResponse())
             .map { movieResponse: MovieResponse ->
                 if (movieResponse.isSuccessful()) {
-                    saveMoviesToDb(movieResponse.results)
+                    if (movieResponse.page == 1L) clearMoviesCash()
+                    saveMoviesToCash(movieResponse.results)
                     return@map Response(movieResponse.page, movieResponse.totalResults, movieResponse.totalPages, true)
                 } else {
                     return@map Response(false)
@@ -42,7 +43,8 @@ class DataRepository(private val movieApi: MovieApi, private val databaseDao: Da
             .onErrorReturnItem(ActorResponse())
             .map { actorResponse: ActorResponse ->
                 if (actorResponse.isSuccessful()) {
-                    saveActorsToDb(actorResponse.results)
+                    if (actorResponse.page == 1L) clearActorsCash()
+                    saveActorsToCash(actorResponse.results)
                     return@map Response(actorResponse.page, actorResponse.totalResults, actorResponse.totalPages, true)
                 } else {
                     return@map Response(false)
@@ -52,6 +54,7 @@ class DataRepository(private val movieApi: MovieApi, private val databaseDao: Da
     fun getPagedMovieListLiveData(): LiveData<PagedList<Movie>> {
         val config = PagedList.Config.Builder()
             .setPageSize(defaultPageSize)
+            .setInitialLoadSizeHint(defaultPageSize)
             .build()
         return LivePagedListBuilder(databaseDao.selectMoviesPaged(), config).build()
     }
@@ -59,15 +62,24 @@ class DataRepository(private val movieApi: MovieApi, private val databaseDao: Da
     fun getPagedActorListLiveData(): LiveData<PagedList<Actor>> {
         val config = PagedList.Config.Builder()
             .setPageSize(defaultPageSize)
+            .setInitialLoadSizeHint(defaultPageSize)
             .build()
         return LivePagedListBuilder(databaseDao.selectActorsPaged(), config).build()
     }
 
-    private fun saveMoviesToDb(list: List<Movie>) {
+    private fun saveMoviesToCash(list: List<Movie>) {
         databaseDao.insertMovies(list)
     }
 
-    private fun saveActorsToDb(list: List<Actor>) {
+    private fun clearMoviesCash() {
+        databaseDao.clearMovieCash()
+    }
+
+    private fun saveActorsToCash(list: List<Actor>) {
         databaseDao.insertActors(list)
+    }
+
+    private fun clearActorsCash() {
+        databaseDao.clearActorsCash()
     }
 }
