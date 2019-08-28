@@ -1,5 +1,6 @@
 package com.escorp.movieworld.ui.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
@@ -24,6 +25,9 @@ class ActorsListAdapter : PagedListAdapter<Actor, ActorsListAdapter.ViewHolder>(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindTo(getItem(position))
+        holder.itemView.setOnClickListener {
+            Log.d("MW:::", "item position: $position")
+        }
     }
 
     class ViewHolder(private val binding: ActorListItemBinding) :

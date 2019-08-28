@@ -66,10 +66,13 @@ class ActorsListFragment : Fragment(), Paginate.Callbacks {
     }
 
     override fun onLoadMore() {
+        Log.d("MW:::", "load page: $page")
         if (!isLoading) {
             isLoading = true
+//            Log.d("MW:::", "load page: $page")
             viewModel.retrievePopularPeople(page++).observe(this, Observer { response ->
                 isLoading = false
+                Log.d("MW:::", "loaded page: ${response.page}")
                 if (response.isSuccessful) hasLoadedAllItems = response.page == response.totalPages
             })
         }

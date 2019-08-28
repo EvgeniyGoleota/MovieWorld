@@ -1,4 +1,4 @@
-package com.escorp.movieworld.di.Components
+package com.escorp.movieworld.di.components
 
 import com.escorp.movieworld.Application
 import com.escorp.movieworld.di.modules.*
