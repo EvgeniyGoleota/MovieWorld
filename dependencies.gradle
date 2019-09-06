@@ -20,8 +20,6 @@ ext {
 
     def picasso = "2.71828"
 
-    def paginate = "0.5.1"
-
     def paging = "2.1.0"
 
     def junit_version = "4.12"
@@ -87,10 +85,6 @@ ext {
 
     picassoDependencies = [
             picasso: "com.squareup.picasso:picasso:$picasso"
-    ]
-
-    paginateDependencies = [
-            paginate: "com.github.markomilos:paginate:$paginate"
     ]
 
     pagingDependencies = [

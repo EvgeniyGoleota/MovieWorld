@@ -55,8 +55,6 @@ dependencies {
 
     implementation picassoDependencies.values()
 
-    implementation paginateDependencies.values()
-
     implementation pagingDependencies.values()
 
     testImplementation juntDependencies.values()

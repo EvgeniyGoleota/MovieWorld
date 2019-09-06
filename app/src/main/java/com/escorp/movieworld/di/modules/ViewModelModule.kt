@@ -3,9 +3,9 @@ package com.escorp.movieworld.di.modules
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.escorp.movieworld.di.annotation.ViewModelMapKey
-import com.escorp.movieworld.ui.viewmodel.ActorsListViewModel
-import com.escorp.movieworld.ui.viewmodel.MoviesListViewModel
-import com.escorp.movieworld.ui.viewmodel.factory.ViewModelFactory
+import com.escorp.movieworld.ui.ActorsScreen.ActorsListViewModel
+import com.escorp.movieworld.ui.MoivesScreen.MoviesListViewModel
+import com.escorp.movieworld.utils.ViewModelFactory
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

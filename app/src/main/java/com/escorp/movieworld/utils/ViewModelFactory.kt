@@ -1,4 +1,4 @@
-package com.escorp.movieworld.ui.viewmodel.factory
+package com.escorp.movieworld.utils
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

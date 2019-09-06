@@ -5,8 +5,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.escorp.movieworld.R
-import com.escorp.movieworld.ui.fragments.ActorsListFragment
-import com.escorp.movieworld.ui.fragments.MoviesListFragment
+import com.escorp.movieworld.ui.ActorsScreen.ActorsListFragment
+import com.escorp.movieworld.ui.MoivesScreen.MoviesListFragment
 import dagger.android.AndroidInjection
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector

@@ -1,4 +1,4 @@
-package com.escorp.movieworld.ui.adapters
+package com.escorp.movieworld.ui.MoivesScreen
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.escorp.movieworld.data.api.models.Movie
 import com.escorp.movieworld.databinding.MovieListItemBinding
 
-class MoviesListAdapter : PagedListAdapter<Movie, MoviesListAdapter.ViewHolder>(diffCallback) {
+class MoviesListAdapter : PagedListAdapter<Movie, MoviesListAdapter.ViewHolder>(
+    diffCallback
+) {
 
     companion object {
         val diffCallback = object : DiffUtil.ItemCallback<Movie>() {
@@ -18,7 +20,9 @@ class MoviesListAdapter : PagedListAdapter<Movie, MoviesListAdapter.ViewHolder>(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(MovieListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return ViewHolder(
+            MovieListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

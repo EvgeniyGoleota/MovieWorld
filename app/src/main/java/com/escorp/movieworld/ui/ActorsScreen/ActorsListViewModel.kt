@@ -1,4 +1,4 @@
-package com.escorp.movieworld.ui.viewmodel
+package com.escorp.movieworld.ui.ActorsScreen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
