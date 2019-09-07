@@ -51,8 +51,6 @@ class DataRepository(private val movieApi: MovieApi, private val databaseDao: Da
                 }
             })
 
-    fun getPopularPeopleFlowable(page: Int) = movieApi.getPopularPeople(page)
-
     fun getPagedMovieListLiveData(): LiveData<PagedList<Movie>> {
         val config = PagedList.Config.Builder()
             .setPageSize(defaultPageSize)
