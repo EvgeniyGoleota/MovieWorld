@@ -1,4 +1,4 @@
-package com.escorp.movieworld.ui.ActorsScreen
+package com.escorp.movieworld.ui.actorsScreen
 
 import android.util.Log
 import android.view.LayoutInflater

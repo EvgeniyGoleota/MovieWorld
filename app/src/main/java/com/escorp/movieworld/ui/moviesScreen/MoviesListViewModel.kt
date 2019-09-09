@@ -1,4 +1,4 @@
-package com.escorp.movieworld.ui.MoivesScreen
+package com.escorp.movieworld.ui.moviesScreen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

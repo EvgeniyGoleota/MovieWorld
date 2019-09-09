@@ -1,7 +1,7 @@
 package com.escorp.movieworld.di.modules
 
-import com.escorp.movieworld.ui.ActorsScreen.ActorsListFragment
-import com.escorp.movieworld.ui.MoivesScreen.MoviesListFragment
+import com.escorp.movieworld.ui.actorsScreen.ActorsListFragment
+import com.escorp.movieworld.ui.moviesScreen.MoviesListFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

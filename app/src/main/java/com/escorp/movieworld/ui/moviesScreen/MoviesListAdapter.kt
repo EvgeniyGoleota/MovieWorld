@@ -1,4 +1,4 @@
-package com.escorp.movieworld.ui.MoivesScreen
+package com.escorp.movieworld.ui.moviesScreen
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

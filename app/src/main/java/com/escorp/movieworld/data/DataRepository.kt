@@ -33,23 +33,7 @@ class DataRepository(private val movieApi: MovieApi, private val databaseDao: Da
                 }
             })
 
-    fun getPopularPeople(page: Int): LiveData<Response> =
-        LiveDataReactiveStreams.fromPublisher(movieApi.getPopularPeople(page)
-            .subscribeOn(Schedulers.io())
-            .doOnError { error ->
-                error.printStackTrace()
-                Log.e("MW:::", "Network error while receiving popular peoples: ${error.message}")
-            }
-            .onErrorReturnItem(ActorResponse())
-            .map { actorResponse: ActorResponse ->
-                if (actorResponse.isSuccessful()) {
-                    if (actorResponse.page == 1L) clearActorsCash()
-                    saveActorsToCash(actorResponse.results)
-                    return@map Response(actorResponse.page, actorResponse.totalResults, actorResponse.totalPages, true)
-                } else {
-                    return@map Response(false)
-                }
-            })
+    fun getPopularPeople(page: Int) = movieApi.getPopularPeople(page)
 
     fun getPagedMovieListLiveData(): LiveData<PagedList<Movie>> {
         val config = PagedList.Config.Builder()
@@ -75,11 +59,11 @@ class DataRepository(private val movieApi: MovieApi, private val databaseDao: Da
         databaseDao.clearMovieCash()
     }
 
-    private fun saveActorsToCash(list: List<Actor>) {
+    fun saveActorsToCash(list: List<Actor>) {
         databaseDao.insertActors(list)
     }
 
-    private fun clearActorsCash() {
+    fun clearActorsCash() {
         databaseDao.clearActorsCash()
     }
 }

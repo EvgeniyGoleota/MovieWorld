@@ -3,6 +3,7 @@ package com.escorp.movieworld.data.api
 import com.escorp.movieworld.data.api.models.MovieResponse
 import com.escorp.movieworld.data.api.models.ActorResponse
 import io.reactivex.Flowable
+import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -12,5 +13,5 @@ interface MovieApi {
     fun getTopRatedMovies(@Query("page") page: Int): Flowable<MovieResponse>
 
     @GET("person/popular?language=en-US&region=US")
-    fun getPopularPeople(@Query("page") page: Int): Flowable<ActorResponse>
+    fun getPopularPeople(@Query("page") page: Int): Observable<ActorResponse>
 }
