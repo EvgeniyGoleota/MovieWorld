@@ -6,15 +6,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.paging.PagedList
 import com.escorp.movieworld.data.DataRepository
-import com.escorp.movieworld.data.api.models.Actor
-import com.escorp.movieworld.data.api.models.ActorResponse
-import com.escorp.movieworld.data.api.models.Response
+import com.escorp.movieworld.data.models.Actor
+import com.escorp.movieworld.data.models.ActorResponse
+import com.escorp.movieworld.data.models.Response
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class ActorsListViewModel @Inject constructor(private val dataRepository: DataRepository) :
-    ViewModel() {
+class ActorsListViewModel @Inject constructor(private val dataRepository: DataRepository) : ViewModel() {
 
     val pagedActorsListLiveData: LiveData<PagedList<Actor>> by lazy {
         dataRepository.getPagedActorListLiveData()

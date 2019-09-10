@@ -2,8 +2,8 @@ package com.escorp.movieworld.data.db
 
 import androidx.paging.DataSource
 import androidx.room.*
-import com.escorp.movieworld.data.api.models.Actor
-import com.escorp.movieworld.data.api.models.Movie
+import com.escorp.movieworld.data.models.Actor
+import com.escorp.movieworld.data.models.Movie
 
 @Dao
 interface DatabaseDao {

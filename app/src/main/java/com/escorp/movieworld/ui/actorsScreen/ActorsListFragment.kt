@@ -10,7 +10,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.escorp.movieworld.databinding.FragmentRecyclerViewBinding
+import com.escorp.movieworld.ui.activities.MainActivity
+import com.escorp.movieworld.ui.interfaces.RecyclerViewOnItemClickListener
 import com.escorp.movieworld.utils.PaginationScrollListener
+import com.escorp.movieworld.utils.enums.DetailActivityTag
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_recycler_view.*
 import javax.inject.Inject
@@ -51,9 +54,14 @@ class ActorsListFragment : Fragment() {
     }
 
     private fun initializeView() {
+        actorListAdapter.onItemClickListener = object : RecyclerViewOnItemClickListener {
+            override fun OnItemClick(itemId: Long) {
+                (activity as MainActivity).startDetailActivity(DetailActivityTag.ACTOR, itemId)
+            }
+        }
+
         recycler_view.apply {
             layoutManager = LinearLayoutManager(context)
-//            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = actorListAdapter
             addOnScrollListener(object : PaginationScrollListener(layoutManager) {
                 override fun loadMore() {

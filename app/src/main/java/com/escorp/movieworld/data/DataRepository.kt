@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveDataReactiveStreams
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.escorp.movieworld.data.api.MovieApi
-import com.escorp.movieworld.data.api.models.*
+import com.escorp.movieworld.data.models.*
 import com.escorp.movieworld.data.db.DatabaseDao
 import com.escorp.movieworld.utils.defaultPageSize
 import io.reactivex.schedulers.Schedulers
@@ -15,25 +15,13 @@ import javax.inject.Singleton
 @Singleton
 class DataRepository(private val movieApi: MovieApi, private val databaseDao: DatabaseDao) {
 
-    fun getTopRatedMovies(page: Int): LiveData<Response> =
-        LiveDataReactiveStreams.fromPublisher(movieApi.getTopRatedMovies(page)
-            .subscribeOn(Schedulers.io())
-            .doOnError { error ->
-                error.printStackTrace()
-                Log.e("MW:::", "Network error while receiving top rated movies: ${error.message}")
-            }
-            .onErrorReturnItem(MovieResponse())
-            .map { movieResponse: MovieResponse ->
-                if (movieResponse.isSuccessful()) {
-                    if (movieResponse.page == 1L) clearMoviesCash()
-                    saveMoviesToCash(movieResponse.results)
-                    return@map Response(movieResponse.page, movieResponse.totalResults, movieResponse.totalPages, true)
-                } else {
-                    return@map Response(false)
-                }
-            })
+    fun getTopRatedMovies(page: Int) = movieApi.getTopRatedMovies(page)
+
+    fun getPopularMovies(page: Int) = movieApi.getPopularMovies(page)
 
     fun getPopularPeople(page: Int) = movieApi.getPopularPeople(page)
+
+    fun getPersonDetails(personId: Int) = movieApi.getPersonDetail(personId)
 
     fun getPagedMovieListLiveData(): LiveData<PagedList<Movie>> {
         val config = PagedList.Config.Builder()
@@ -51,11 +39,11 @@ class DataRepository(private val movieApi: MovieApi, private val databaseDao: Da
         return LivePagedListBuilder(databaseDao.selectActorsPaged(), config).build()
     }
 
-    private fun saveMoviesToCash(list: List<Movie>) {
+    fun saveMoviesToCash(list: List<Movie>) {
         databaseDao.insertMovies(list)
     }
 
-    private fun clearMoviesCash() {
+    fun clearMoviesCash() {
         databaseDao.clearMovieCash()
     }
 

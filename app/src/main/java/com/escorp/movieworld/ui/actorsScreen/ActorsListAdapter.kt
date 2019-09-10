@@ -1,24 +1,16 @@
 package com.escorp.movieworld.ui.actorsScreen
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.escorp.movieworld.data.api.models.Actor
+import com.escorp.movieworld.data.models.Actor
 import com.escorp.movieworld.databinding.ActorListItemBinding
+import com.escorp.movieworld.ui.interfaces.RecyclerViewOnItemClickListener
 
-class ActorsListAdapter : PagedListAdapter<Actor, ActorsListAdapter.ViewHolder>(
-    diffCallback
-) {
+class ActorsListAdapter : PagedListAdapter<Actor, ActorsListAdapter.ViewHolder>(Actor.diffCallback) {
 
-    companion object {
-        val diffCallback = object : DiffUtil.ItemCallback<Actor>() {
-            override fun areItemsTheSame(oldItem: Actor, newItem: Actor) = oldItem.id == newItem.id
-            override fun areContentsTheSame(oldItem: Actor, newItem: Actor) = oldItem == newItem
-        }
-    }
+    var onItemClickListener: RecyclerViewOnItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -28,15 +20,13 @@ class ActorsListAdapter : PagedListAdapter<Actor, ActorsListAdapter.ViewHolder>(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindTo(getItem(position))
-        holder.itemView.setOnClickListener {
-            Log.d("MW:::", "item position: $position")
-        }
     }
 
-    class ViewHolder(private val binding: ActorListItemBinding) :
+    inner class ViewHolder(private val binding: ActorListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindTo(actor: Actor?) {
             actor?.let { binding.actor = it }
+            onItemClickListener?.let { binding.onClickListener = it }
         }
     }
 }

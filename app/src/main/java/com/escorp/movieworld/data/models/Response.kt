@@ -1,4 +1,4 @@
-package com.escorp.movieworld.data.api.models
+package com.escorp.movieworld.data.models
 
 data class Response(
     val page: Long,

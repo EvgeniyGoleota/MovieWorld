@@ -1,5 +1,6 @@
 package com.escorp.movieworld.ui.activities
 
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +8,8 @@ import androidx.fragment.app.Fragment
 import com.escorp.movieworld.R
 import com.escorp.movieworld.ui.actorsScreen.ActorsListFragment
 import com.escorp.movieworld.ui.moviesScreen.MoviesListFragment
+import com.escorp.movieworld.utils.*
+import com.escorp.movieworld.utils.enums.DetailActivityTag
 import dagger.android.AndroidInjection
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
@@ -18,19 +21,20 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
 
-    private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        when (item.itemId) {
-            R.id.navigation_actors -> {
-                loadFragment(ActorsListFragment())
-                return@OnNavigationItemSelectedListener true
+    private val onNavigationItemSelectedListener =
+        BottomNavigationView.OnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.navigation_actors -> {
+                    loadFragment(ActorsListFragment())
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.navigation_movies -> {
+                    loadFragment(MoviesListFragment())
+                    return@OnNavigationItemSelectedListener true
+                }
             }
-            R.id.navigation_movies -> {
-                loadFragment(MoviesListFragment())
-                return@OnNavigationItemSelectedListener true
-            }
+            false
         }
-        false
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -45,12 +49,17 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.apply {
             replace(R.id.container, fragment)
-            addToBackStack(null)
             commit()
         }
     }
 
-    override fun supportFragmentInjector(): DispatchingAndroidInjector<Fragment> {
-        return dispatchingAndroidInjector
+    fun startDetailActivity(tag: DetailActivityTag, id: Long) {
+        val intent = Intent(this, DetailActivity::class.java)
+        intent.putExtra(TAG, tag)
+        val bundle = Bundle()
+        bundle.putLong(ID, id)
+        startActivity(intent, bundle)
     }
+
+    override fun supportFragmentInjector() = dispatchingAndroidInjector
 }

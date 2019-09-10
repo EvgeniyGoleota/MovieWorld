@@ -1,32 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="actor" type="com.escorp.movieworld.data.api.models.Actor"/>
+
+        <variable
+                name="actor"
+                type="com.escorp.movieworld.data.models.Actor" />
+
+        <variable
+                name="onClickListener"
+                type="com.escorp.movieworld.ui.interfaces.RecyclerViewOnItemClickListener" />
     </data>
 
     <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:padding="5dp"
-    >
+            android:onClick="@{() -> onClickListener.OnItemClick(actor.id)}">
 
         <ImageView
                 android:id="@+id/item_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="fitXY"
                 android:adjustViewBounds="true"
+                android:scaleType="fitXY"
                 app:imageUrl="@{actor.getFormattedPosterPath()}"
-                app:placeholder="@{@drawable/ic_placeholder}"/>
+                app:placeholder="@{@drawable/ic_placeholder}" />
 
         <TextView
                 android:id="@+id/name_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:text="@{actor.name}"/>
+                android:text="@{actor.name}"
+                android:textAlignment="center" />
 
     </LinearLayout>
 </layout>

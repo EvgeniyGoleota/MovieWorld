@@ -1,5 +1,6 @@
 package com.escorp.movieworld.di.modules
 
+import com.escorp.movieworld.ui.actorDetailScreen.ActorDetailFragment
 import com.escorp.movieworld.ui.actorsScreen.ActorsListFragment
 import com.escorp.movieworld.ui.moviesScreen.MoviesListFragment
 import dagger.Module
@@ -13,4 +14,7 @@ abstract class FragmentModule {
 
     @ContributesAndroidInjector
     abstract fun contributeMoviesListFragment(): MoviesListFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeActorDitailFragmenr(): ActorDetailFragment
 }

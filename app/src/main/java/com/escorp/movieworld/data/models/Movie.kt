@@ -1,10 +1,15 @@
-package com.escorp.movieworld.data.api.models
+package com.escorp.movieworld.data.models
 
+import androidx.recyclerview.widget.DiffUtil
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-@Entity(primaryKeys = ["id"])
+@Entity
 data class Movie(
+    @PrimaryKey(autoGenerate = true)
+    val dbId: Int,
+
     val id: Long,
 
     @SerializedName(value = "header", alternate = ["title", "name"])
@@ -53,6 +58,13 @@ data class Movie(
     @SerializedName("origin_country")
     var originCountry: List<String>?
 ) {
+    companion object {
+        val diffCallback = object : DiffUtil.ItemCallback<Movie>() {
+            override fun areItemsTheSame(oldItem: Movie, newItem: Movie) = oldItem.id == newItem.id
+            override fun areContentsTheSame(oldItem: Movie, newItem: Movie) = oldItem == newItem
+        }
+    }
+
     fun getFormattedPosterPath(): String? {
         if (posterPath != null && !posterPath!!.startsWith("http")) {
             posterPath = String.format("https://image.tmdb.org/t/p/w500%s", posterPath)

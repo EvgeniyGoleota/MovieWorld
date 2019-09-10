@@ -1,8 +1,8 @@
 package com.escorp.movieworld.data.db
 
 import androidx.room.TypeConverter
-import com.escorp.movieworld.data.api.models.Actor
-import com.escorp.movieworld.data.api.models.Movie
+import com.escorp.movieworld.data.models.Actor
+import com.escorp.movieworld.data.models.Movie
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 

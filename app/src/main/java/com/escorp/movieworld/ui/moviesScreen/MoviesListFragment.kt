@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.escorp.movieworld.databinding.FragmentRecyclerViewBinding
+import com.escorp.movieworld.utils.PaginationScrollListener
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_recycler_view.*
 import javax.inject.Inject
@@ -24,6 +25,10 @@ class MoviesListFragment : Fragment() {
 
     private lateinit var binding: FragmentRecyclerViewBinding
     private lateinit var viewModel: MoviesListViewModel
+
+    private var page = 1
+    private var isLoading = false
+    private var isLastPage = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,11 +51,27 @@ class MoviesListFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
 //            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = movieListAdapter
+            addOnScrollListener(object : PaginationScrollListener(layoutManager) {
+                override fun loadMore() {
+                    page++
+                    isLoading = true
+                    viewModel.retrieveTopRatedMovies(page)
+                }
+
+                override fun isLastPage() = isLoading
+
+                override fun isLoading() = isLastPage
+            })
         }
     }
 
     private fun initializeViewModel() {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(MoviesListViewModel::class.java)
         viewModel.pagedMoviesListLiveData.observe(this, Observer { movieListAdapter.submitList(it) })
+
+        viewModel.responseStatus.observe(this, Observer { response ->
+            isLoading = false
+            if (response.isSuccessful) isLastPage = response.page == response.totalPages
+        })
     }
 }
