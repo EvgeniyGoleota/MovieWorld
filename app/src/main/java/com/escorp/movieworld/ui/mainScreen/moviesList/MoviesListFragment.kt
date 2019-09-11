@@ -1,4 +1,4 @@
-package com.escorp.movieworld.ui.actorsScreen
+package com.escorp.movieworld.ui.mainScreen.moviesList
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,24 +10,21 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.escorp.movieworld.databinding.FragmentRecyclerViewBinding
-import com.escorp.movieworld.ui.activities.MainActivity
-import com.escorp.movieworld.ui.interfaces.RecyclerViewOnItemClickListener
 import com.escorp.movieworld.utils.PaginationScrollListener
-import com.escorp.movieworld.utils.enums.DetailActivityTag
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_recycler_view.*
 import javax.inject.Inject
 
-class ActorsListFragment : Fragment() {
+class MoviesListFragment : Fragment() {
 
     @Inject
     internal lateinit var viewModelFactory: ViewModelProvider.Factory
 
     @Inject
-    internal lateinit var actorListAdapter: ActorsListAdapter
+    internal lateinit var movieListAdapter: MoviesListAdapter
 
     private lateinit var binding: FragmentRecyclerViewBinding
-    private lateinit var viewModel: ActorsListViewModel
+    private lateinit var viewModel: MoviesListViewModel
 
     private var page = 1
     private var isLoading = false
@@ -39,11 +36,7 @@ class ActorsListFragment : Fragment() {
         initializeViewModel()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentRecyclerViewBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -54,20 +47,15 @@ class ActorsListFragment : Fragment() {
     }
 
     private fun initializeView() {
-        actorListAdapter.onItemClickListener = object : RecyclerViewOnItemClickListener {
-            override fun OnItemClick(itemId: Long) {
-                (activity as MainActivity).startDetailActivity(DetailActivityTag.ACTOR, itemId)
-            }
-        }
-
         recycler_view.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = actorListAdapter
+//            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            adapter = movieListAdapter
             addOnScrollListener(object : PaginationScrollListener(layoutManager) {
                 override fun loadMore() {
                     page++
                     isLoading = true
-                    viewModel.retrievePopularPeople(page)
+                    viewModel.retrieveTopRatedMovies(page)
                 }
 
                 override fun isLastPage() = isLoading
@@ -78,9 +66,8 @@ class ActorsListFragment : Fragment() {
     }
 
     private fun initializeViewModel() {
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(ActorsListViewModel::class.java)
-
-        viewModel.pagedActorsListLiveData.observe(this, Observer { actorListAdapter.submitList(it) })
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(MoviesListViewModel::class.java)
+        viewModel.pagedMoviesListLiveData.observe(this, Observer { movieListAdapter.submitList(it) })
 
         viewModel.responseStatus.observe(this, Observer { response ->
             isLoading = false

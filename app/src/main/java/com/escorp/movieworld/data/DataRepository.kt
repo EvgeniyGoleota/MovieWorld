@@ -21,7 +21,7 @@ class DataRepository(private val movieApi: MovieApi, private val databaseDao: Da
 
     fun getPopularPeople(page: Int) = movieApi.getPopularPeople(page)
 
-    fun getPersonDetails(personId: Int) = movieApi.getPersonDetail(personId)
+    fun getPersonDetails(personId: Long) = movieApi.getPersonDetail(personId)
 
     fun getPagedMovieListLiveData(): LiveData<PagedList<Movie>> {
         val config = PagedList.Config.Builder()

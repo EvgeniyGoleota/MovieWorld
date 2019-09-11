@@ -1,7 +1,9 @@
 package com.escorp.movieworld.utils
 
 import android.graphics.drawable.Drawable
+import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.squareup.picasso.Picasso
 
@@ -11,5 +13,20 @@ fun setImageUrl(view: ImageView, url: String?, placeholderDrawable: Drawable) {
         Picasso.get().load(url).placeholder(placeholderDrawable).into(view)
     } else {
         view.setImageDrawable(placeholderDrawable)
+    }
+}
+
+@BindingAdapter("textWithCheck")
+fun setTextWithCheck(view: TextView, text: String?) {
+    if (text != null) {
+        view.visibility = View.VISIBLE
+        view.text = text
+    }
+}
+
+@BindingAdapter("visibilityByContent")
+fun setVisibilityByContent(view: TextView, text: String?) {
+    if (text != null) {
+        view.visibility = View.VISIBLE
     }
 }

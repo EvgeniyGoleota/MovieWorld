@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
-        <variable name="actorsViewModel" type="com.escorp.movieworld.ui.actorsScreen.ActorsListViewModel"/>
-        <variable name="moviesViewModel" type="com.escorp.movieworld.ui.moviesScreen.MoviesListViewModel"/>
+        <variable name="actorsViewModel" type="com.escorp.movieworld.ui.detailScreen.actorDetail.actorsInfo.ActorInfoViewModel"/>
+        <variable name="moviesViewModel" type="com.escorp.movieworld.ui.mainScreen.moviesList.MoviesListViewModel"/>
     </data>
 
     <androidx.recyclerview.widget.RecyclerView

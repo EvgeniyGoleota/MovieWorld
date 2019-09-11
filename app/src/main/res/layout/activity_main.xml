@@ -5,7 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.activities.MainActivity">
+        tools:context=".ui.mainScreen.MainActivity">
 
 
     <FrameLayout
@@ -31,5 +31,5 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0"
             app:elevation="20dp"
-            app:menu="@menu/bottom_nav_menu"/>
+            app:menu="@menu/bottom_nav_menu_main_screen"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

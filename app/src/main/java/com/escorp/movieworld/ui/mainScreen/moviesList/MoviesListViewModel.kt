@@ -1,4 +1,4 @@
-package com.escorp.movieworld.ui.moviesScreen
+package com.escorp.movieworld.ui.mainScreen.moviesList
 
 import android.util.Log
 import androidx.lifecycle.LiveData

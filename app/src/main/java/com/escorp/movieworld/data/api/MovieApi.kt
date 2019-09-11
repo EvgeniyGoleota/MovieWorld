@@ -1,9 +1,8 @@
 package com.escorp.movieworld.data.api
 
-import com.escorp.movieworld.data.models.Actor
+import com.escorp.movieworld.data.models.ActorDetail
 import com.escorp.movieworld.data.models.MovieResponse
 import com.escorp.movieworld.data.models.ActorResponse
-import io.reactivex.Flowable
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -21,5 +20,5 @@ interface MovieApi {
     fun getPopularPeople(@Query("page") page: Int): Observable<ActorResponse>
 
     @GET("person/{person_id}?language=en-US&region=US")
-    fun getPersonDetail(@Path("person_id") personId: Int): Observable<Actor>
+    fun getPersonDetail(@Path("person_id") personId: Long): Observable<ActorDetail>
 }

@@ -1,4 +1,4 @@
-package com.escorp.movieworld.ui.actorsScreen
+package com.escorp.movieworld.ui.mainScreen.actorsList
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

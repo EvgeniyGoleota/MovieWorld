@@ -1,7 +1,7 @@
 package com.escorp.movieworld.di.modules
 
-import com.escorp.movieworld.ui.actorsScreen.ActorsListAdapter
-import com.escorp.movieworld.ui.moviesScreen.MoviesListAdapter
+import com.escorp.movieworld.ui.mainScreen.actorsList.ActorsListAdapter
+import com.escorp.movieworld.ui.mainScreen.moviesList.MoviesListAdapter
 import dagger.Module
 import dagger.Provides
 

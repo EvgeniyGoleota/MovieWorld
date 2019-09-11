@@ -3,9 +3,9 @@ package com.escorp.movieworld.di.modules
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.escorp.movieworld.di.annotation.ViewModelMapKey
-import com.escorp.movieworld.ui.actorDetailScreen.ActorDetailViewModel
-import com.escorp.movieworld.ui.actorsScreen.ActorsListViewModel
-import com.escorp.movieworld.ui.moviesScreen.MoviesListViewModel
+import com.escorp.movieworld.ui.detailScreen.actorDetail.actorsInfo.ActorInfoViewModel
+import com.escorp.movieworld.ui.mainScreen.actorsList.ActorsListViewModel
+import com.escorp.movieworld.ui.mainScreen.moviesList.MoviesListViewModel
 import com.escorp.movieworld.utils.ViewModelFactory
 import dagger.Binds
 import dagger.Module
@@ -29,6 +29,6 @@ internal abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelMapKey(ActorDetailViewModel::class)
-    protected abstract fun actorDetailViewModel(actorDetailViewModel: ActorDetailViewModel): ViewModel
+    @ViewModelMapKey(ActorInfoViewModel::class)
+    protected abstract fun actorDetailViewModel(actorDetailViewModel: ActorInfoViewModel): ViewModel
 }

@@ -1,4 +1,4 @@
-package com.escorp.movieworld.ui.activities
+package com.escorp.movieworld.ui.mainScreen
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,8 +6,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.escorp.movieworld.R
-import com.escorp.movieworld.ui.actorsScreen.ActorsListFragment
-import com.escorp.movieworld.ui.moviesScreen.MoviesListFragment
+import com.escorp.movieworld.ui.detailScreen.DetailActivity
+import com.escorp.movieworld.ui.mainScreen.actorsList.ActorsListFragment
+import com.escorp.movieworld.ui.mainScreen.moviesList.MoviesListFragment
 import com.escorp.movieworld.utils.*
 import com.escorp.movieworld.utils.enums.DetailActivityTag
 import dagger.android.AndroidInjection
@@ -56,9 +57,8 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     fun startDetailActivity(tag: DetailActivityTag, id: Long) {
         val intent = Intent(this, DetailActivity::class.java)
         intent.putExtra(TAG, tag)
-        val bundle = Bundle()
-        bundle.putLong(ID, id)
-        startActivity(intent, bundle)
+        intent.putExtra(ID, id)
+        startActivity(intent)
     }
 
     override fun supportFragmentInjector() = dispatchingAndroidInjector

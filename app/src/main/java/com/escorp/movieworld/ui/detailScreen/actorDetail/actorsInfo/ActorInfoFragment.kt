@@ -1,4 +1,4 @@
-package com.escorp.movieworld.ui.actorDetailScreen
+package com.escorp.movieworld.ui.detailScreen.actorDetail.actorsInfo
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,26 +6,27 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import com.escorp.movieworld.databinding.FragmentActorDetailBinding
-import com.escorp.movieworld.ui.activities.DetailActivity
+import com.escorp.movieworld.databinding.FragmentActorInfoBinding
+import com.escorp.movieworld.ui.detailScreen.DetailActivity
+import com.escorp.movieworld.utils.ID
 import com.escorp.movieworld.utils.ViewModelFactory
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
-class ActorDetailFragment : Fragment() {
+class ActorInfoFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
-    lateinit var binding: FragmentActorDetailBinding
-    lateinit var viewModel: ActorDetailViewModel
+    lateinit var binding: FragmentActorInfoBinding
+    lateinit var viewModel: ActorInfoViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AndroidSupportInjection.inject(this)
         initViewModel()
-        (activity as DetailActivity).intent.extras?.let {
-            viewModel.
+        (activity as DetailActivity).intent.getSerializableExtra(ID)?.let {
+            viewModel.retrievePersonDetails(it as Long)
         }
     }
 
@@ -34,16 +35,16 @@ class ActorDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentActorDetailBinding.inflate(inflater, container, false)
+        binding = FragmentActorInfoBinding.inflate(inflater, container, false)
+        binding.apply {
+            lifecycleOwner = this@ActorInfoFragment
+            viewModel = viewModel
+        }
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
     private fun initViewModel() {
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(ActorDetailViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(ActorInfoViewModel::class.java)
 
     }
 }
