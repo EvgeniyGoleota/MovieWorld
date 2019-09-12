@@ -25,9 +25,6 @@ class ActorInfoFragment : Fragment() {
         super.onCreate(savedInstanceState)
         AndroidSupportInjection.inject(this)
         initViewModel()
-        (activity as DetailActivity).intent.getSerializableExtra(ID)?.let {
-            viewModel.retrievePersonDetails(it as Long)
-        }
     }
 
     override fun onCreateView(
@@ -37,7 +34,7 @@ class ActorInfoFragment : Fragment() {
     ): View? {
         binding = FragmentActorInfoBinding.inflate(inflater, container, false)
         binding.apply {
-            lifecycleOwner = this@ActorInfoFragment
+            lifecycleOwner = viewLifecycleOwner
             viewModel = viewModel
         }
         return binding.root
@@ -46,5 +43,6 @@ class ActorInfoFragment : Fragment() {
     private fun initViewModel() {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(ActorInfoViewModel::class.java)
 
+        viewModel.retrievePersonDetails((activity as DetailActivity).id!!)
     }
 }

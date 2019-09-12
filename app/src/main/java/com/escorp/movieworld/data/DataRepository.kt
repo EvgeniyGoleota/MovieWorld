@@ -23,6 +23,15 @@ class DataRepository(private val movieApi: MovieApi, private val databaseDao: Da
 
     fun getPersonDetails(personId: Long) = movieApi.getPersonDetail(personId)
 
+    fun getPersonPhotos(personId: Long): LiveData<APhotoResponse> =
+        LiveDataReactiveStreams.fromPublisher(movieApi.getPersonPhotos(personId)
+            .doOnError { error ->
+                error.printStackTrace()
+                Log.e("MW:::", "Network error while receiving person's photo: ${error.message}")
+            }
+            .onErrorReturnItem(APhotoResponse(-1, emptyList()))
+            .subscribeOn(Schedulers.io()))
+
     fun getPagedMovieListLiveData(): LiveData<PagedList<Movie>> {
         val config = PagedList.Config.Builder()
             .setPageSize(defaultPageSize)

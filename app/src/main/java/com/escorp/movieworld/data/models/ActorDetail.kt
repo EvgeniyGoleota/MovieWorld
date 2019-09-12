@@ -1,12 +1,8 @@
 package com.escorp.movieworld.data.models
 
-import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 data class ActorDetail(
-    @PrimaryKey(autoGenerate = true)
-    val dbId: Int,
-
     val id: Long,
 
     @SerializedName("profile_path")

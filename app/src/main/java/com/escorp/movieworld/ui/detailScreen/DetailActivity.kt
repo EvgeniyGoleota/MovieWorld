@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.escorp.movieworld.R
 import com.escorp.movieworld.ui.detailScreen.actorDetail.actorsInfo.ActorInfoFragment
+import com.escorp.movieworld.ui.detailScreen.actorDetail.actorsPhotos.ActorPhotoFragment
 import com.escorp.movieworld.utils.*
 import com.escorp.movieworld.utils.enums.DetailActivityTag
 import com.escorp.movieworld.utils.enums.DetailActivityTag.*
@@ -19,6 +20,8 @@ class DetailActivity : AppCompatActivity(), HasSupportFragmentInjector {
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
 
+    var id: Long? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
@@ -28,14 +31,18 @@ class DetailActivity : AppCompatActivity(), HasSupportFragmentInjector {
     }
 
     private fun configActivity() {
-        when (intent.getSerializableExtra(TAG) as DetailActivityTag) {
-            ACTOR -> {
-                initActorNavView()
-                loadFragment(ActorInfoFragment())
-            }
-            MOVIE -> {
+        id = intent.getSerializableExtra(ID) as Long
+
+        id?.let {
+            when (intent.getSerializableExtra(TAG) as DetailActivityTag) {
+                ACTOR -> {
+                    initActorNavView()
+                    loadFragment(ActorInfoFragment())
+                }
+                MOVIE -> {
 //                initMovieNavView()
 //                loadFragment()
+                }
             }
         }
     }
@@ -50,7 +57,7 @@ class DetailActivity : AppCompatActivity(), HasSupportFragmentInjector {
                         return@setOnNavigationItemSelectedListener true
                     }
                     R.id.photos -> {
-//                        loadFragment()
+                        loadFragment(ActorPhotoFragment())
                         return@setOnNavigationItemSelectedListener true
                     }
 

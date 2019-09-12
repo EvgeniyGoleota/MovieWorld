@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.escorp.movieworld.di.annotation.ViewModelMapKey
 import com.escorp.movieworld.ui.detailScreen.actorDetail.actorsInfo.ActorInfoViewModel
+import com.escorp.movieworld.ui.detailScreen.actorDetail.actorsPhotos.ActorPhotoFragment
+import com.escorp.movieworld.ui.detailScreen.actorDetail.actorsPhotos.ActorPhotoViewModel
 import com.escorp.movieworld.ui.mainScreen.actorsList.ActorsListViewModel
 import com.escorp.movieworld.ui.mainScreen.moviesList.MoviesListViewModel
 import com.escorp.movieworld.utils.ViewModelFactory
@@ -30,5 +32,10 @@ internal abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelMapKey(ActorInfoViewModel::class)
-    protected abstract fun actorDetailViewModel(actorDetailViewModel: ActorInfoViewModel): ViewModel
+    protected abstract fun actorInfoViewModel(actorInfoViewModel: ActorInfoViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelMapKey(ActorPhotoViewModel::class)
+    protected abstract fun actorPhotoViewModel(actorPhotoViewModel: ActorPhotoViewModel): ViewModel
 }
