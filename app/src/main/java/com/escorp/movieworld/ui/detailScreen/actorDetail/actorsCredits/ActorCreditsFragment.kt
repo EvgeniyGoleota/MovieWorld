@@ -1,4 +1,4 @@
-package com.escorp.movieworld.ui.detailScreen.actorDetail.actorsPhotos
+package com.escorp.movieworld.ui.detailScreen.actorDetail.actorsCredits
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,15 +16,15 @@ import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_recycler_view.*
 import javax.inject.Inject
 
-class ActorPhotoFragment : Fragment() {
+class ActorCreditsFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
     @Inject
-    lateinit var photoListAdapter: ActorPhotoListAdapter
+    lateinit var creditsListAdapter: ActorCreditsListAdapter
 
-    private lateinit var viewModel: ActorPhotoViewModel
+    private lateinit var viewModel: ActorCreditsViewModel
     private lateinit var binding: FragmentRecyclerViewBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,24 +48,24 @@ class ActorPhotoFragment : Fragment() {
     }
 
     private fun initView() {
-        photoListAdapter.onItemClickListener = object : RecyclerViewOnItemClickListener {
+        creditsListAdapter.onClickListener = object : RecyclerViewOnItemClickListener {
             override fun OnItemClick(itemId: Long) {
-
+                //todo implement
             }
+
         }
         recycler_view.apply {
-            adapter = photoListAdapter
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            adapter = creditsListAdapter
         }
     }
 
     private fun initViewModel() {
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(ActorPhotoViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(ActorCreditsViewModel::class.java)
 
-        viewModel.getPhotos((activity as DetailActivity).id!!).observe(this, Observer { response ->
-            if (response.isValid()) {
-                photoListAdapter.setItems(response.profiles)
-            }
+        viewModel.getPersonsCredits((activity as DetailActivity).id!!).observe(this, Observer { response ->
+            if (response.isValid()) creditsListAdapter.setItems(response.cast)
         })
     }
+
 }

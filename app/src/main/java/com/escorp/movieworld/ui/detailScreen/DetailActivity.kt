@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.escorp.movieworld.R
+import com.escorp.movieworld.ui.detailScreen.actorDetail.actorsCredits.ActorCreditsFragment
+import com.escorp.movieworld.ui.detailScreen.actorDetail.actorsCredits.ActorCreditsListAdapter
 import com.escorp.movieworld.ui.detailScreen.actorDetail.actorsInfo.ActorInfoFragment
 import com.escorp.movieworld.ui.detailScreen.actorDetail.actorsPhotos.ActorPhotoFragment
 import com.escorp.movieworld.utils.*
@@ -62,7 +64,7 @@ class DetailActivity : AppCompatActivity(), HasSupportFragmentInjector {
                     }
 
                     R.id.movies -> {
-//                        loadFragment()
+                        loadFragment(ActorCreditsFragment())
                         return@setOnNavigationItemSelectedListener true
                     }
                 }

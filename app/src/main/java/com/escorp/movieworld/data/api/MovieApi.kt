@@ -1,9 +1,6 @@
 package com.escorp.movieworld.data.api
 
-import com.escorp.movieworld.data.models.APhotoResponse
-import com.escorp.movieworld.data.models.ActorDetail
-import com.escorp.movieworld.data.models.MovieResponse
-import com.escorp.movieworld.data.models.ActorResponse
+import com.escorp.movieworld.data.models.*
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import retrofit2.http.GET
@@ -26,4 +23,7 @@ interface MovieApi {
 
     @GET("person/{person_id}/images?language=en-US&region=US")
     fun getPersonPhotos(@Path("person_id") personId: Long): Flowable<APhotoResponse>
+
+    @GET("person/{person_id}/movie_credits?language=en-US&region=US")
+    fun getPersonsCombinedCredits(@Path("person_id") personId: Long): Flowable<ACreditsResponse>
 }

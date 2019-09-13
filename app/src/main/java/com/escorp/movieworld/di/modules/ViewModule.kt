@@ -1,5 +1,6 @@
 package com.escorp.movieworld.di.modules
 
+import com.escorp.movieworld.ui.detailScreen.actorDetail.actorsCredits.ActorCreditsListAdapter
 import com.escorp.movieworld.ui.detailScreen.actorDetail.actorsPhotos.ActorPhotoListAdapter
 import com.escorp.movieworld.ui.mainScreen.actorsList.ActorsListAdapter
 import com.escorp.movieworld.ui.mainScreen.moviesList.MoviesListAdapter
@@ -17,4 +18,7 @@ class ViewModule {
 
     @Provides
     fun providesActorPhotoListAdapter(): ActorPhotoListAdapter = ActorPhotoListAdapter()
+
+    @Provides
+    fun providesActorCreditsListAdapter(): ActorCreditsListAdapter = ActorCreditsListAdapter()
 }
