@@ -19,7 +19,7 @@ class ActorInfoViewModel @Inject constructor(private val dataRepository: DataRep
     val person = ObservableField<ActorDetail>()
     val name = MutableLiveData<String>()
 
-    fun retrievePersonDetails(personId: Long) {
+    fun retrievePersonDetails(personId: Int) {
         dataRepository.getPersonDetails(personId)
             .doOnSubscribe {
                 compositeDisposable.add(it)

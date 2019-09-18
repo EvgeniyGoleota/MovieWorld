@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.escorp.movieworld.databinding.FragmentRecyclerViewBinding
 import com.escorp.movieworld.ui.mainScreen.MainActivity
-import com.escorp.movieworld.ui.interfaces.RecyclerViewOnItemClickListener
+import com.escorp.movieworld.utils.interfaces.RecyclerViewOnItemClickListener
 import com.escorp.movieworld.utils.PaginationScrollListener
 import com.escorp.movieworld.utils.enums.DetailActivityTag
 import dagger.android.support.AndroidSupportInjection
@@ -55,7 +55,7 @@ class ActorsListFragment : Fragment() {
 
     private fun initializeView() {
         actorListAdapter.onItemClickListener = object : RecyclerViewOnItemClickListener {
-            override fun OnItemClick(itemId: Long) {
+            override fun onItemClick(itemId: Int) {
                 (activity as MainActivity).startDetailActivity(DetailActivityTag.ACTOR, itemId)
             }
         }

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.escorp.movieworld.data.models.Image
 import com.escorp.movieworld.databinding.PhotoListItemBinding
-import com.escorp.movieworld.ui.interfaces.RecyclerViewOnItemClickListener
+import com.escorp.movieworld.utils.interfaces.RecyclerViewOnItemClickListener
 
 class ActorPhotoListAdapter : RecyclerView.Adapter<ActorPhotoListAdapter.ViewHolder>() {
 

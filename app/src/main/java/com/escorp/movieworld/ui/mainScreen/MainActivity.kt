@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         }
     }
 
-    fun startDetailActivity(tag: DetailActivityTag, id: Long) {
+    fun startDetailActivity(tag: DetailActivityTag, id: Int) {
         val intent = Intent(this, DetailActivity::class.java)
         intent.putExtra(TAG, tag)
         intent.putExtra(ID, id)

@@ -6,7 +6,7 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.escorp.movieworld.data.models.Actor
 import com.escorp.movieworld.databinding.ActorListItemBinding
-import com.escorp.movieworld.ui.interfaces.RecyclerViewOnItemClickListener
+import com.escorp.movieworld.utils.interfaces.RecyclerViewOnItemClickListener
 
 class ActorsListAdapter : PagedListAdapter<Actor, ActorsListAdapter.ViewHolder>(Actor.diffCallback) {
 

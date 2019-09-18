@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.escorp.movieworld.data.models.Movie
 import com.escorp.movieworld.databinding.MovieListItemBinding
-import com.escorp.movieworld.ui.interfaces.RecyclerViewOnItemClickListener
+import com.escorp.movieworld.utils.interfaces.RecyclerViewOnItemClickListener
 
 class ActorCreditsListAdapter : RecyclerView.Adapter<ActorCreditsListAdapter.ViewHolder>() {
 

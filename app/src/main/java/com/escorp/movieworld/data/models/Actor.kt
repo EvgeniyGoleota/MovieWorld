@@ -10,7 +10,7 @@ data class Actor(
     @PrimaryKey(autoGenerate = true)
     val dbId: Int,
 
-    val id: Long,
+    val id: Int,
 
     @SerializedName("profile_path")
     var profilePath: String?,

@@ -6,5 +6,5 @@ import javax.inject.Inject
 
 class ActorCreditsViewModel @Inject constructor(private val dataRepository: DataRepository) : ViewModel() {
 
-    fun getPersonsCredits(personId: Long) = dataRepository.getPersonCredits(personId)
+    fun getPersonsCredits(personId: Int) = dataRepository.getPersonCredits(personId)
 }

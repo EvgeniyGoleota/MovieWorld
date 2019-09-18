@@ -10,7 +10,7 @@ data class Movie(
     @PrimaryKey(autoGenerate = true)
     val dbId: Int,
 
-    val id: Long,
+    val id: Int,
 
     @SerializedName(value = "header", alternate = ["title", "name"])
     val header: String?,

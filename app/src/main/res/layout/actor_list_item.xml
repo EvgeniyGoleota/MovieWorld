@@ -10,7 +10,7 @@
 
         <variable
                 name="onClickListener"
-                type="com.escorp.movieworld.ui.interfaces.RecyclerViewOnItemClickListener" />
+                type="com.escorp.movieworld.utils.interfaces.RecyclerViewOnItemClickListener" />
     </data>
 
     <LinearLayout
@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="5dp"
-            android:onClick="@{() -> onClickListener.OnItemClick(actor.id)}">
+            android:onClick="@{() -> onClickListener.onItemClick(actor.id)}">
 
         <ImageView
                 android:id="@+id/item_image"

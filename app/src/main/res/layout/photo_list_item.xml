@@ -11,13 +11,13 @@
 
         <variable
                 name="clickListener"
-                type="com.escorp.movieworld.ui.interfaces.RecyclerViewOnItemClickListener" />
+                type="com.escorp.movieworld.utils.interfaces.RecyclerViewOnItemClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="@{() -> clickListener.OnItemClick(-1)}"
+            android:onClick="@{() -> clickListener.onItemClick(-1)}"
             android:orientation="vertical">
 
         <ImageView

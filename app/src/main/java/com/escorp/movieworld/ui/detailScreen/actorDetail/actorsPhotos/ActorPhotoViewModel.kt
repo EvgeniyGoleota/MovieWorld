@@ -6,5 +6,5 @@ import javax.inject.Inject
 
 class ActorPhotoViewModel @Inject constructor(private val dataRepository: DataRepository) : ViewModel() {
 
-    fun getPhotos(personId: Long) = dataRepository.getPersonPhotos(personId)
+    fun getPhotos(personId: Int) = dataRepository.getPersonPhotos(personId)
 }
