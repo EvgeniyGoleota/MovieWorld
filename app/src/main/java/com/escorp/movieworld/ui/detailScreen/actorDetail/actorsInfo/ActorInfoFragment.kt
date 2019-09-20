@@ -33,10 +33,8 @@ class ActorInfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentActorInfoBinding.inflate(inflater, container, false)
-        binding.apply {
-            lifecycleOwner = viewLifecycleOwner
-            viewModel = viewModel
-        }
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
         return binding.root
     }
 

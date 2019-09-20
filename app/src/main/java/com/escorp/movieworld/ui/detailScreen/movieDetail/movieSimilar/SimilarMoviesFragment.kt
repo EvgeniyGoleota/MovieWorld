@@ -12,6 +12,7 @@ import com.escorp.movieworld.databinding.FragmentRecyclerViewBinding
 import com.escorp.movieworld.ui.detailScreen.DetailActivity
 import com.escorp.movieworld.ui.mainScreen.moviesList.MoviesListAdapter
 import com.escorp.movieworld.utils.ViewModelFactory
+import com.escorp.movieworld.utils.enums.DetailActivityTag
 import com.escorp.movieworld.utils.interfaces.RecyclerViewOnItemClickListener
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_recycler_view.*
@@ -47,7 +48,7 @@ class SimilarMoviesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         moviesListAdapter.onItemClickListener = object : RecyclerViewOnItemClickListener {
             override fun onItemClick(itemId: Int) {
-
+                (activity as DetailActivity).startDetailActivity(DetailActivityTag.MOVIE, itemId)
             }
         }
         recycler_view.apply {

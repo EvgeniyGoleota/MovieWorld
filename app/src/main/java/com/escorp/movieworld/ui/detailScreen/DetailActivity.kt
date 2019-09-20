@@ -1,5 +1,6 @@
 package com.escorp.movieworld.ui.detailScreen
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -105,6 +106,13 @@ class DetailActivity : AppCompatActivity(), HasSupportFragmentInjector {
             replace(R.id.container, fragment)
             commit()
         }
+    }
+
+    fun startDetailActivity(tag: DetailActivityTag, id: Int) {
+        val intent = Intent(this, DetailActivity::class.java)
+        intent.putExtra(TAG, tag)
+        intent.putExtra(ID, id)
+        startActivity(intent)
     }
 
     override fun supportFragmentInjector() = dispatchingAndroidInjector

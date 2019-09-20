@@ -25,12 +25,7 @@ class MovieInfoViewModel @Inject constructor(private val dataRepository: DataRep
             }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnNext { movieDetail ->
-                movie.apply {
-                    set(movieDetail)
-                    notifyChange()
-                }
-            }
+            .doOnNext(movie::set)
             .subscribe()
     }
 

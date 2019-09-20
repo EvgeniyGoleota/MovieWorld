@@ -23,7 +23,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="@{() -> onClickListener.onItemClick(-1)}" >
+                android:onClick="@{() -> onClickListener.onItemClick(cast.id)}" >
 
             <ImageView
                     android:id="@+id/avatar"

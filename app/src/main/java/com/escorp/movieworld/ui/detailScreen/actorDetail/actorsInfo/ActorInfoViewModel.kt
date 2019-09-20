@@ -11,13 +11,11 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class ActorInfoViewModel @Inject constructor(private val dataRepository: DataRepository) :
-    ViewModel() {
+class ActorInfoViewModel @Inject constructor(private val dataRepository: DataRepository) : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
 
     val person = ObservableField<ActorDetail>()
-    val name = MutableLiveData<String>()
 
     fun retrievePersonDetails(personId: Int) {
         dataRepository.getPersonDetails(personId)
@@ -29,12 +27,7 @@ class ActorInfoViewModel @Inject constructor(private val dataRepository: DataRep
             }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnNext { actorDetail ->
-                person.set(actorDetail)
-                person.notifyChange()
-                name.postValue(actorDetail.name)
-            }
-//            .doOnNext(person::set)
+            .doOnNext(person::set)
             .subscribe()
     }
 

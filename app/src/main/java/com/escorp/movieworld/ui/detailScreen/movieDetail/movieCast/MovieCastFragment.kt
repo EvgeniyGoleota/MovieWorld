@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.escorp.movieworld.databinding.FragmentRecyclerViewBinding
 import com.escorp.movieworld.ui.detailScreen.DetailActivity
 import com.escorp.movieworld.utils.ViewModelFactory
+import com.escorp.movieworld.utils.enums.DetailActivityTag
 import com.escorp.movieworld.utils.interfaces.RecyclerViewOnItemClickListener
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_recycler_view.*
@@ -50,7 +51,7 @@ class MovieCastFragment : Fragment() {
     private  fun initView() {
         movieCastListAdapter.onItemClickListener = object : RecyclerViewOnItemClickListener {
             override fun onItemClick(itemId: Int) {
-
+                (activity as DetailActivity).startDetailActivity(DetailActivityTag.ACTOR, itemId)
             }
         }
         recycler_view.apply {

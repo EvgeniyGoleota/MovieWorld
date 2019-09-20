@@ -12,6 +12,7 @@ import com.escorp.movieworld.databinding.FragmentRecyclerViewBinding
 import com.escorp.movieworld.ui.detailScreen.DetailActivity
 import com.escorp.movieworld.utils.interfaces.RecyclerViewOnItemClickListener
 import com.escorp.movieworld.utils.ViewModelFactory
+import com.escorp.movieworld.utils.enums.DetailActivityTag
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_recycler_view.*
 import javax.inject.Inject
@@ -50,7 +51,7 @@ class ActorCreditsFragment : Fragment() {
     private fun initView() {
         creditsListAdapter.onClickListener = object : RecyclerViewOnItemClickListener {
             override fun onItemClick(itemId: Int) {
-                //todo implement
+                (activity as DetailActivity).startDetailActivity(DetailActivityTag.MOVIE, itemId)
             }
 
         }

@@ -21,6 +21,8 @@ fun setTextWithCheck(view: TextView, text: String?) {
     if (text != null) {
         view.visibility = View.VISIBLE
         view.text = text
+    } else {
+        view.visibility = View.GONE
     }
 }
 
@@ -28,5 +30,7 @@ fun setTextWithCheck(view: TextView, text: String?) {
 fun setVisibilityByContent(view: TextView, text: String?) {
     if (text != null) {
         view.visibility = View.VISIBLE
+    } else {
+        view.visibility = View.GONE
     }
 }
