@@ -60,8 +60,8 @@ class SimilarMoviesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         moviesListAdapter.onItemClickListener = object : RecyclerViewOnItemClickListener {
-            override fun onItemClick(itemId: Int) {
-                findNavController().navigate(MovieDetailFragmentDirections.actionMovieDetailSelf(itemId))
+            override fun onItemClick(itemId: Int, title: String) {
+                findNavController().navigate(MovieDetailFragmentDirections.actionMovieDetailSelf(itemId, title))
             }
         }
         recycler_view.apply {

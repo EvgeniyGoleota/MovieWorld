@@ -10,14 +10,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.escorp.movieworld.R
 import com.escorp.movieworld.databinding.FragmentRecyclerViewBinding
-import com.escorp.movieworld.ui.MainActivity
-import com.escorp.movieworld.ui.detailScreen.actorDetail.ActorDetailFragment
 import com.escorp.movieworld.ui.mainScreen.MainScreenFragmentDirections
 import com.escorp.movieworld.utils.interfaces.RecyclerViewOnItemClickListener
 import com.escorp.movieworld.utils.PaginationScrollListener
-import com.escorp.movieworld.utils.enums.DetailActivityTag
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_recycler_view.*
 import javax.inject.Inject
@@ -59,8 +55,8 @@ class ActorsListFragment : Fragment() {
 
     private fun initializeView() {
         actorListAdapter.onItemClickListener = object : RecyclerViewOnItemClickListener {
-            override fun onItemClick(itemId: Int) {
-                findNavController().navigate(MainScreenFragmentDirections.actionMainScreenToActorDetail(itemId))
+            override fun onItemClick(itemId: Int, title: String) {
+                findNavController().navigate(MainScreenFragmentDirections.actionMainScreenToActorDetail(itemId, title))
             }
         }
 

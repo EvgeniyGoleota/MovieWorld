@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="5dp"
-            android:onClick="@{() -> onClickListener.onItemClick(actor.id)}">
+            android:onClick="@{() -> onClickListener.onItemClick(actor.id, actor.name)}">
 
         <ImageView
                 android:id="@+id/item_image"

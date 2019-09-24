@@ -3,6 +3,9 @@ package com.escorp.movieworld.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.escorp.movieworld.R
 import dagger.android.AndroidInjection
 import dagger.android.DispatchingAndroidInjector
@@ -14,11 +17,18 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
 
+    private val navController: NavController by lazy { findNavController(R.id.main_content) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setupActionBarWithNavController(navController)
     }
 
     override fun supportFragmentInjector() = dispatchingAndroidInjector
+
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp()
+    }
 }

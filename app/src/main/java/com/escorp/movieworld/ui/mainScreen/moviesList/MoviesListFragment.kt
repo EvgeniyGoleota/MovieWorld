@@ -53,8 +53,8 @@ class MoviesListFragment : Fragment() {
 
     private fun initializeView() {
         movieListAdapter.onItemClickListener = object : RecyclerViewOnItemClickListener {
-            override fun onItemClick(itemId: Int) {
-                findNavController().navigate(MainScreenFragmentDirections.actionMainScreenToMovieDetail(itemId))
+            override fun onItemClick(itemId: Int, title: String) {
+                findNavController().navigate(MainScreenFragmentDirections.actionMainScreenToMovieDetail(itemId, title))
             }
         }
 
