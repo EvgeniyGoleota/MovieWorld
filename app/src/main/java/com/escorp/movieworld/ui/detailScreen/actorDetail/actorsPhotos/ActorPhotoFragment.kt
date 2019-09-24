@@ -60,7 +60,7 @@ class ActorPhotoFragment : Fragment() {
 
     private fun initView() {
         photoListAdapter.onItemClickListener = object : RecyclerViewOnItemClickListener {
-            override fun onItemClick(itemId: Int) {
+            override fun onItemClick(itemId: Int, title: String) {
 
             }
         }

@@ -63,12 +63,8 @@ class ActorCreditsFragment : Fragment() {
 
     private fun initView() {
         creditsListAdapter.onClickListener = object : RecyclerViewOnItemClickListener {
-            override fun onItemClick(itemId: Int) {
-                findNavController().navigate(
-                    ActorDetailFragmentDirections.actionActorDetailToMovieDetail(
-                        itemId
-                    )
-                )
+            override fun onItemClick(itemId: Int, title: String) {
+                findNavController().navigate(ActorDetailFragmentDirections.actionActorDetailToMovieDetail(itemId, title))
             }
 
         }
