@@ -7,12 +7,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.escorp.movieworld.databinding.FragmentRecyclerViewBinding
-import com.escorp.movieworld.ui.detailScreen.DetailActivity
+import com.escorp.movieworld.ui.detailScreen.movieDetail.MovieDetailFragmentArgs
+import com.escorp.movieworld.ui.detailScreen.movieDetail.MovieDetailFragmentDirections
+import com.escorp.movieworld.utils.ID
 import com.escorp.movieworld.utils.ViewModelFactory
 import com.escorp.movieworld.utils.enums.DetailActivityTag
 import com.escorp.movieworld.utils.interfaces.RecyclerViewOnItemClickListener
+import com.escorp.movieworld.utils.isIdValid
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_recycler_view.*
 import javax.inject.Inject
@@ -27,6 +32,14 @@ class MovieCastFragment : Fragment() {
 
     private lateinit var viewModel: MovieCastViewModel
     private lateinit var binding: FragmentRecyclerViewBinding
+
+    private val movieId: Int? by lazy { arguments?.getInt(ID) }
+
+    companion object {
+        fun newInstance(movieId: Int) = MovieCastFragment().apply {
+            arguments = Bundle().apply { putInt(ID, movieId) }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidSupportInjection.inject(this)
@@ -51,7 +64,7 @@ class MovieCastFragment : Fragment() {
     private  fun initView() {
         movieCastListAdapter.onItemClickListener = object : RecyclerViewOnItemClickListener {
             override fun onItemClick(itemId: Int) {
-                (activity as DetailActivity).startDetailActivity(DetailActivityTag.ACTOR, itemId)
+                findNavController().navigate(MovieDetailFragmentDirections.actionMovieDetailToActorDetail(itemId))
             }
         }
         recycler_view.apply {
@@ -63,11 +76,13 @@ class MovieCastFragment : Fragment() {
     private fun initViewModel() {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(MovieCastViewModel::class.java)
 
-        viewModel.getMovieCast((activity as DetailActivity).id!!).observe(this, Observer { list ->
-            if (list.isNotEmpty()) {
-                list.toMutableList().sort()
-                movieCastListAdapter.setItems(list)
-            }
-        })
+        if (isIdValid(movieId)) {
+            viewModel.getMovieCast(movieId!!).observe(this, Observer { list ->
+                if (list.isNotEmpty()) {
+                    list.toMutableList().sort()
+                    movieCastListAdapter.setItems(list)
+                }
+            })
+        }
     }
 }

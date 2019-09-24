@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
+        app:startDestination="@id/mainScreenFragment">
+
+    <fragment
+            android:id="@+id/mainScreenFragment"
+            android:name="com.escorp.movieworld.ui.mainScreen.MainScreenFragment"
+            android:label="MainScreenFragment" >
+        <action
+                android:id="@+id/action_mainScreen_to_actorDetail"
+                app:destination="@id/actorDetailFragment" />
+        <action
+                android:id="@+id/action_mainScreen_to_movieDetail"
+                app:destination="@id/movieDetailFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/actorDetailFragment"
+            android:name="com.escorp.movieworld.ui.detailScreen.actorDetail.ActorDetailFragment"
+            android:label="ActorDetailFragment" >
+        <argument
+                android:name="personId"
+                app:argType="integer"
+                android:defaultValue="-1" />
+        <action
+                android:id="@+id/action_actorDetail_to_movieDetail"
+                app:destination="@id/movieDetailFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/movieDetailFragment"
+            android:name="com.escorp.movieworld.ui.detailScreen.movieDetail.MovieDetailFragment"
+            android:label="MovieDetailFragment" >
+        <argument
+                android:name="movieId"
+                app:argType="integer"
+                android:defaultValue="-1" />
+        <action
+                android:id="@+id/action_movieDetail_self"
+                app:destination="@id/movieDetailFragment" />
+        <action
+                android:id="@+id/action_movieDetail_to_actorDetail"
+                app:destination="@id/actorDetailFragment" />
+    </fragment>
+</navigation>

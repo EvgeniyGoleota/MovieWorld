@@ -8,9 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.escorp.movieworld.databinding.FragmentRecyclerViewBinding
-import com.escorp.movieworld.ui.mainScreen.MainActivity
+import com.escorp.movieworld.ui.MainActivity
+import com.escorp.movieworld.ui.mainScreen.MainScreenFragmentDirections
 import com.escorp.movieworld.utils.PaginationScrollListener
 import com.escorp.movieworld.utils.enums.DetailActivityTag
 import com.escorp.movieworld.utils.interfaces.RecyclerViewOnItemClickListener
@@ -52,11 +54,7 @@ class MoviesListFragment : Fragment() {
     private fun initializeView() {
         movieListAdapter.onItemClickListener = object : RecyclerViewOnItemClickListener {
             override fun onItemClick(itemId: Int) {
-                when (activity) {
-                    is MainActivity -> {
-                        (activity as MainActivity).startDetailActivity(DetailActivityTag.MOVIE, itemId)
-                    }
-                }
+                findNavController().navigate(MainScreenFragmentDirections.actionMainScreenToMovieDetail(itemId))
             }
         }
 

@@ -6,9 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.navArgs
 import com.escorp.movieworld.databinding.FragmentMovieInfoBinding
-import com.escorp.movieworld.ui.detailScreen.DetailActivity
+import com.escorp.movieworld.ui.detailScreen.movieDetail.MovieDetailFragmentArgs
+import com.escorp.movieworld.utils.ID
 import com.escorp.movieworld.utils.ViewModelFactory
+import com.escorp.movieworld.utils.isIdValid
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
@@ -19,6 +22,14 @@ class MovieInfoFragment : Fragment() {
 
     private lateinit var viewModel: MovieInfoViewModel
     private lateinit var binding: FragmentMovieInfoBinding
+
+    private val movieId: Int? by lazy { arguments?.getInt(ID) }
+
+    companion object {
+        fun newInstance(movieId: Int) = MovieInfoFragment().apply {
+            arguments = Bundle().apply { putInt(ID, movieId) }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidSupportInjection.inject(this)
@@ -40,6 +51,6 @@ class MovieInfoFragment : Fragment() {
     private fun initViewModel() {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(MovieInfoViewModel::class.java)
 
-        viewModel.getMovieDetails((activity as DetailActivity).id!!)
+        if (isIdValid(movieId)) viewModel.getMovieDetails(movieId!!)
     }
 }

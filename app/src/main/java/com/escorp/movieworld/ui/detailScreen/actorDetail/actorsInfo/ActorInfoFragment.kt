@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.navArgs
 import com.escorp.movieworld.databinding.FragmentActorInfoBinding
-import com.escorp.movieworld.ui.detailScreen.DetailActivity
+import com.escorp.movieworld.ui.detailScreen.actorDetail.ActorDetailFragmentArgs
 import com.escorp.movieworld.utils.ID
 import com.escorp.movieworld.utils.ViewModelFactory
+import com.escorp.movieworld.utils.isIdValid
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
@@ -18,8 +20,17 @@ class ActorInfoFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
+
     lateinit var binding: FragmentActorInfoBinding
     lateinit var viewModel: ActorInfoViewModel
+
+    private val personId: Int? by lazy { arguments?.getInt(ID) }
+
+    companion object {
+        fun newInstance(personId: Int) = ActorInfoFragment().apply {
+            arguments = Bundle().apply { putInt(ID, personId) }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +52,6 @@ class ActorInfoFragment : Fragment() {
     private fun initViewModel() {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(ActorInfoViewModel::class.java)
 
-        viewModel.retrievePersonDetails((activity as DetailActivity).id!!)
+         if (isIdValid(personId)) viewModel.retrievePersonDetails(personId!!)
     }
 }
