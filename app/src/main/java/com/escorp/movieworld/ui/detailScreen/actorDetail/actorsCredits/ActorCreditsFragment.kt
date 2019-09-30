@@ -79,8 +79,8 @@ class ActorCreditsFragment : Fragment() {
             ViewModelProviders.of(this, viewModelFactory).get(ActorCreditsViewModel::class.java)
 
         if (isIdValid(personId)) {
-            viewModel.getPersonsCredits(personId!!).observe(this, Observer { response ->
-                if (response.isValid()) creditsListAdapter.setItems(response.cast)
+            viewModel.getPersonsCredits(personId!!).observe(this, Observer { list ->
+                if (list.isNotEmpty()) creditsListAdapter.setItems(list)
             })
         }
     }

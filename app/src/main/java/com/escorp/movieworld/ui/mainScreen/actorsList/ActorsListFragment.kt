@@ -84,7 +84,7 @@ class ActorsListFragment : Fragment() {
 
         viewModel.responseStatus.observe(this, Observer { response ->
             isLoading = false
-            if (response.isSuccessful) isLastPage = response.page == response.totalPages
+            isLastPage = response.page == response.totalPages
         })
     }
 }

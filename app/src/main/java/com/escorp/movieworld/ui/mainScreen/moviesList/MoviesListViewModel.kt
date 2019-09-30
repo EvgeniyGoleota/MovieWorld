@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.paging.PagedList
 import com.escorp.movieworld.data.DataRepository
 import com.escorp.movieworld.data.models.Movie
-import com.escorp.movieworld.data.models.MovieResponse
 import com.escorp.movieworld.data.models.Response
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -21,7 +20,7 @@ class MoviesListViewModel @Inject constructor(private val dataRepository: DataRe
     }
 
     private val compositeDisposable = CompositeDisposable()
-    val responseStatus = MutableLiveData<Response>()
+    val responseStatus = MutableLiveData<Response<Movie>>()
 
     init {
         retrieveTopRatedMovies(1)
@@ -31,27 +30,17 @@ class MoviesListViewModel @Inject constructor(private val dataRepository: DataRe
     fun retrieveTopRatedMovies(page: Int) {
         dataRepository.getPopularMovies(page)
             .subscribeOn(Schedulers.io())
+            .doOnSubscribe {
+                compositeDisposable.add(it)
+            }
             .doOnError { error ->
                 error.printStackTrace()
                 Log.e("MW:::", "Network error while receiving top rated movies: ${error.message}")
             }
-            .doOnSubscribe {
-                compositeDisposable.add(it)
-            }
-            .onErrorReturnItem(MovieResponse())
-            .map { movieResponse: MovieResponse ->
-                if (movieResponse.isSuccessful()) {
-                    if (movieResponse.page == 1L) dataRepository.clearMoviesCash()
-                    dataRepository.saveMoviesToCash(movieResponse.results)
-                    return@map Response(
-                        movieResponse.page,
-                        movieResponse.totalResults,
-                        movieResponse.totalPages,
-                        true
-                    )
-                } else {
-                    return@map Response(false)
-                }
+            .map { movieResponse: Response<Movie> ->
+                if (movieResponse.page == 1L) dataRepository.clearMoviesCash()
+                dataRepository.saveMoviesToCash(movieResponse.results)
+                return@map movieResponse
             }
             .doOnNext { response ->
                 responseStatus.postValue(response)

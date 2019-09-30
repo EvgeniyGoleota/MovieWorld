@@ -1,10 +1,19 @@
 package com.escorp.movieworld.data.models
 
-data class Response(
+import com.google.gson.annotations.SerializedName
+
+data class Response<T>(
     val page: Long,
+
+    val results: List<T>,
+
+    @SerializedName("total_results")
     val totalResults: Long,
-    val totalPages: Long,
-    val isSuccessful: Boolean
+
+    @SerializedName("total_pages")
+    val totalPages: Long
 ) {
-    constructor(isSuccessful: Boolean): this(-1, -1, -1, isSuccessful)
+    constructor(): this(-1, emptyList(), -1, -1)
+
+    fun isSuccessful() = results.isNotEmpty()
 }

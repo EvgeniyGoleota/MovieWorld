@@ -1,8 +1,12 @@
 package com.escorp.movieworld.data.models
 
-data class APhotoResponse(
+data class CreditsResponse<T>(
+
     val id: Int,
-    val profiles: List<Image>
+
+    val cast: List<T>
+
+//  val crew: List<Crew>
 ) {
     constructor(): this(-1, emptyList())
 }

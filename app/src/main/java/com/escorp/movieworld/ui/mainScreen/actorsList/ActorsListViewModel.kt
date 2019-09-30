@@ -7,19 +7,19 @@ import androidx.lifecycle.ViewModel
 import androidx.paging.PagedList
 import com.escorp.movieworld.data.DataRepository
 import com.escorp.movieworld.data.models.Actor
-import com.escorp.movieworld.data.models.ActorResponse
 import com.escorp.movieworld.data.models.Response
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class ActorsListViewModel @Inject constructor(private val dataRepository: DataRepository) : ViewModel() {
+class ActorsListViewModel @Inject constructor(private val dataRepository: DataRepository) :
+    ViewModel() {
 
     val pagedActorsListLiveData: LiveData<PagedList<Actor>> by lazy {
         dataRepository.getPagedActorListLiveData()
     }
     private val compositeDisposable = CompositeDisposable()
-    val responseStatus = MutableLiveData<Response>()
+    val responseStatus = MutableLiveData<Response<Actor>>()
 
     init {
         retrievePopularPeople(1)
@@ -28,27 +28,17 @@ class ActorsListViewModel @Inject constructor(private val dataRepository: DataRe
     fun retrievePopularPeople(page: Int) {
         dataRepository.getPopularPeople(page)
             .subscribeOn(Schedulers.io())
+            .doOnSubscribe {
+                compositeDisposable.add(it)
+            }
             .doOnError { error ->
                 error.printStackTrace()
                 Log.e("MW:::", "Network error while receiving popular peoples: ${error.message}")
             }
-            .doOnSubscribe {
-                compositeDisposable.add(it)
-            }
-            .onErrorReturnItem(ActorResponse())
-            .map { actorResponse: ActorResponse ->
-                if (actorResponse.isSuccessful()) {
-                    if (actorResponse.page == 1L) dataRepository.clearActorsCash()
-                    dataRepository.saveActorsToCash(actorResponse.results)
-                    return@map Response(
-                        actorResponse.page,
-                        actorResponse.totalResults,
-                        actorResponse.totalPages,
-                        true
-                    )
-                } else {
-                    return@map Response(false)
-                }
+            .map { actorResponse: Response<Actor> ->
+                if (actorResponse.page == 1L) dataRepository.clearActorsCash()
+                dataRepository.saveActorsToCash(actorResponse.results)
+                return@map actorResponse
             }
             .doOnNext { response ->
                 responseStatus.postValue(response)

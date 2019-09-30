@@ -24,40 +24,34 @@ class DataRepository(private val movieApi: MovieApi, private val databaseDao: Da
 
     fun getPersonDetails(personId: Int) = movieApi.getPersonDetail(personId)
 
-    fun getPersonPhotos(personId: Int): LiveData<APhotoResponse> =
+    fun getPersonPhotos(personId: Int): LiveData<List<Image>> =
         LiveDataReactiveStreams.fromPublisher(movieApi.getPersonPhotos(personId)
             .doOnError { error ->
                 error.printStackTrace()
                 Log.e("MW:::", "Network error while receiving person's photo: ${error.message}")
             }
-            .onErrorReturnItem(APhotoResponse(-1, emptyList()))
+            .onErrorReturnItem(APhotoResponse())
+            .map { it.profiles }
             .subscribeOn(Schedulers.io()))
 
-    fun getPersonCredits(personId: Int): LiveData<ACreditsResponse> =
+    fun getPersonCredits(personId: Int): LiveData<List<Movie>> =
         LiveDataReactiveStreams.fromPublisher(movieApi.getPersonsCombinedCredits(personId)
             .doOnError { error ->
                 error.printStackTrace()
-                Log.e(
-                    "MW:::",
-                    "Network error while receiving person's credits: ${error.message}"
-                )
+                Log.e("MW:::", "Network error while receiving person's credits: ${error.message}")
             }
-            .onErrorReturnItem(ACreditsResponse(-1, emptyList()))
+            .onErrorReturnItem(CreditsResponse())
+            .map { it.cast }
             .subscribeOn(Schedulers.io()))
 
     fun getMovieCredits(movieId: Int): LiveData<List<Cast>> =
         LiveDataReactiveStreams.fromPublisher(movieApi.getMovieCredits(movieId)
             .doOnError { error ->
                 error.printStackTrace()
-                Log.e(
-                    "MW:::",
-                    "Network error while receiving movie's credits: ${error.message}"
-                )
+                Log.e("MW:::", "Network error while receiving movie's credits: ${error.message}")
             }
-            .onErrorReturnItem(MCreditsResponse(-1, emptyList()))
-            .map { response ->
-                return@map response.cast
-            }
+            .onErrorReturnItem(CreditsResponse())
+            .map { it.cast }
             .subscribeOn(Schedulers.io()))
 
     fun getSimilarMovies(movieId: Int, page: Int) = movieApi.getSimilarMovies(movieId, page)
