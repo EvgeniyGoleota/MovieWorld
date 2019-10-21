@@ -66,7 +66,7 @@ data class Movie(
     }
 
     fun getFormattedPosterPath(): String? {
-        if (posterPath != null && !posterPath!!.startsWith("http")) {
+        if (posterPath?.startsWith("http") == false) {
             posterPath = String.format("https://image.tmdb.org/t/p/w500%s", posterPath)
         }
         return posterPath

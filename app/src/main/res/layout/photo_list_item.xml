@@ -11,7 +11,7 @@
 
         <variable
                 name="clickListener"
-                type="com.escorp.movieworld.utils.interfaces.RecyclerViewOnItemClickListener" />
+                type="com.escorp.movieworld.ui.uiUtils.RecyclerViewOnItemClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

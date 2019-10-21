@@ -1,100 +1,42 @@
 package com.escorp.movieworld.data
 
-import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.LiveDataReactiveStreams
-import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import com.escorp.movieworld.data.api.MovieApi
 import com.escorp.movieworld.data.dataSources.factories.SimilarMovieDataSourceFactory
 import com.escorp.movieworld.data.models.*
-import com.escorp.movieworld.data.db.DatabaseDao
-import com.escorp.movieworld.utils.defaultPageSize
-import io.reactivex.schedulers.Schedulers
-import javax.inject.Singleton
+import io.reactivex.Observable
 
-@Singleton
-class DataRepository(private val movieApi: MovieApi, private val databaseDao: DatabaseDao) {
+interface DataRepository {
 
-    fun getTopRatedMovies(page: Int) = movieApi.getTopRatedMovies(page)
+    fun getTopRatedMovies(page: Int): Observable<Response<Movie>>
 
-    fun getPopularMovies(page: Int) = movieApi.getPopularMovies(page)
+    fun getPopularMovies(page: Int): Observable<Response<Movie>>
 
-    fun getPopularPeople(page: Int) = movieApi.getPopularPeople(page)
+    fun getPopularPeople(page: Int): Observable<Response<Actor>>
 
-    fun getPersonDetails(personId: Int) = movieApi.getPersonDetail(personId)
+    fun getPersonDetails(personId: Int): Observable<ActorDetail>
 
-    fun getPersonPhotos(personId: Int): LiveData<List<Image>> =
-        LiveDataReactiveStreams.fromPublisher(movieApi.getPersonPhotos(personId)
-            .doOnError { error ->
-                error.printStackTrace()
-                Log.e("MW:::", "Network error while receiving person's photo: ${error.message}")
-            }
-            .onErrorReturnItem(APhotoResponse())
-            .map { it.profiles }
-            .subscribeOn(Schedulers.io()))
+    fun getPersonPhotos(personId: Int): LiveData<List<Image>>
 
-    fun getPersonCredits(personId: Int): LiveData<List<Movie>> =
-        LiveDataReactiveStreams.fromPublisher(movieApi.getPersonsCombinedCredits(personId)
-            .doOnError { error ->
-                error.printStackTrace()
-                Log.e("MW:::", "Network error while receiving person's credits: ${error.message}")
-            }
-            .onErrorReturnItem(CreditsResponse())
-            .map { it.cast }
-            .subscribeOn(Schedulers.io()))
+    fun getPersonCredits(personId: Int): LiveData<List<Movie>>
 
-    fun getMovieCredits(movieId: Int): LiveData<List<Cast>> =
-        LiveDataReactiveStreams.fromPublisher(movieApi.getMovieCredits(movieId)
-            .doOnError { error ->
-                error.printStackTrace()
-                Log.e("MW:::", "Network error while receiving movie's credits: ${error.message}")
-            }
-            .onErrorReturnItem(CreditsResponse())
-            .map { it.cast }
-            .subscribeOn(Schedulers.io()))
+    fun getMovieCredits(movieId: Int): LiveData<List<Cast>>
 
-    fun getSimilarMovies(movieId: Int, page: Int) = movieApi.getSimilarMovies(movieId, page)
+    fun getSimilarMovies(movieId: Int, page: Int): Observable<Response<Movie>>
 
-    fun getMovieDetail(movieId: Int) = movieApi.getMovieDetail(movieId)
+    fun getMovieDetail(movieId: Int): Observable<MovieDetail>
 
-    fun getPagedMovieListLiveData(): LiveData<PagedList<Movie>> {
-        val config = PagedList.Config.Builder()
-            .setPageSize(defaultPageSize)
-            .setInitialLoadSizeHint(defaultPageSize)
-            .build()
-        return LivePagedListBuilder(databaseDao.selectMoviesPaged(), config).build()
-    }
+    fun getPagedMovieListLiveData(): LiveData<PagedList<Movie>>
 
-    fun getPagedSimilarMoviesListLiveData(dataSourceFactory: SimilarMovieDataSourceFactory): LiveData<PagedList<Movie>> {
-        val config = PagedList.Config.Builder()
-            .setPageSize(defaultPageSize)
-            .setInitialLoadSizeHint(defaultPageSize)
-            .build()
-        return LivePagedListBuilder(dataSourceFactory, config).build()
-    }
+    fun getPagedSimilarMoviesListLiveData(dataSourceFactory: SimilarMovieDataSourceFactory): LiveData<PagedList<Movie>>
 
-    fun getPagedActorListLiveData(): LiveData<PagedList<Actor>> {
-        val config = PagedList.Config.Builder()
-            .setPageSize(defaultPageSize)
-            .setInitialLoadSizeHint(defaultPageSize)
-            .build()
-        return LivePagedListBuilder(databaseDao.selectActorsPaged(), config).build()
-    }
+    fun getPagedActorListLiveData(): LiveData<PagedList<Actor>>
 
-    fun saveMoviesToCash(list: List<Movie>) {
-        databaseDao.insertMovies(list)
-    }
+    fun saveMoviesToCash(list: List<Movie>)
 
-    fun clearMoviesCash() {
-        databaseDao.clearMovieCash()
-    }
+    fun clearMoviesCash()
 
-    fun saveActorsToCash(list: List<Actor>) {
-        databaseDao.insertActors(list)
-    }
+    fun saveActorsToCash(list: List<Actor>)
 
-    fun clearActorsCash() {
-        databaseDao.clearActorsCash()
-    }
+    fun clearActorsCash()
 }

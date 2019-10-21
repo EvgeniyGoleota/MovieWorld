@@ -10,5 +10,5 @@ import com.escorp.movieworld.data.models.Movie
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun databaseDao(): DatabaseDao
+    abstract fun databaseDao(): TMDbDao
 }

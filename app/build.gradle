@@ -51,28 +51,28 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation kotlinDependencies.values()
-    implementation coreAndroidDependencies.values()
+    implementation kotlinDependencies
+    implementation coreAndroidDependencies
 
-    implementation lifecycleDependencies.values()
-    annotationProcessor lifecycleDependenciesAnatation.values()
+    implementation lifecycleDependencies
+    annotationProcessor lifecycleDependenciesAnatation
 
-    implementation navigationDependencies.values()
+    implementation navigationDependencies
 
-    implementation retrofitDependencies.values()
+    implementation retrofitDependencies
 
-    implementation roomDependencies.values()
-    kapt roomCompilerDependency.values()
+    implementation roomDependencies
+    kapt roomCompilerDependency
 
-    implementation rxjavaDependencies.values()
+    implementation rxjavaDependencies
 
-    implementation daggerDependencies.values()
-    kapt daggerDependenciesAnnotation.values()
+    implementation daggerDependencies
+    kapt daggerDependenciesAnnotation
 
-    implementation picassoDependencies.values()
+    implementation picassoDependencies
 
-    implementation pagingDependencies.values()
+    implementation pagingDependencies
 
-    testImplementation juntDependencies.values()
-    androidTestImplementation androidTestDependencies.values()
+    testImplementation juntDependencies
+    androidTestImplementation androidTestDependencies
 }

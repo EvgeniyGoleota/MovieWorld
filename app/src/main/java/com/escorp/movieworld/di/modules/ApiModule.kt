@@ -10,9 +10,7 @@ import dagger.Module
 import dagger.Provides
 import io.reactivex.schedulers.Schedulers
 import okhttp3.Cache
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -54,17 +52,22 @@ class ApiModule {
 
     @Provides
     @Singleton
-    internal fun providesRetrofit(gson: Gson, okHttpClient: OkHttpClient, context: Application): Retrofit {
+    internal fun providesRetrofit(
+        gson: Gson,
+        okHttpClient: OkHttpClient,
+        context: Application
+    ): Retrofit {
         val builder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
             .baseUrl(context.getString(R.string.serverAdderss))
             .client(okHttpClient)
 
-            return builder.build()
+        return builder.build()
     }
 
     @Provides
     @Singleton
-    internal fun providesMovieApi(retrofit: Retrofit): MovieApi = retrofit.create(MovieApi::class.java)
+    internal fun providesMovieApi(retrofit: Retrofit): MovieApi =
+        retrofit.create(MovieApi::class.java)
 }

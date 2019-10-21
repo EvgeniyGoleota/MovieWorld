@@ -14,7 +14,7 @@ data class Image(
     val width: Int?
 ) {
     fun getFormattedFilePath(): String? {
-        if (filePath != null && !filePath!!.startsWith("http")) {
+        if (filePath?.startsWith("http") == false) {
             filePath = String.format("https://image.tmdb.org/t/p/w500%s", filePath)
         }
         return filePath

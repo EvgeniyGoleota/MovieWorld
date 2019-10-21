@@ -17,7 +17,7 @@
     </fragment>
     <fragment
             android:id="@+id/actorDetailFragment"
-            android:name="com.escorp.movieworld.ui.detailScreen.actorDetail.ActorDetailFragment"
+            android:name="com.escorp.movieworld.ui.detailScreen.actor.ActorDetailFragment"
             android:label="{title}">
         <argument
                 android:name="personId"
@@ -33,7 +33,7 @@
     </fragment>
     <fragment
             android:id="@+id/movieDetailFragment"
-            android:name="com.escorp.movieworld.ui.detailScreen.movieDetail.MovieDetailFragment"
+            android:name="com.escorp.movieworld.ui.detailScreen.movie.MovieDetailFragment"
             android:label="{title}">
         <argument
                 android:name="movieId"

@@ -3,7 +3,7 @@ package com.escorp.movieworld.di.modules
 import androidx.room.Room
 import com.escorp.movieworld.Application
 import com.escorp.movieworld.data.db.AppDatabase
-import com.escorp.movieworld.data.db.DatabaseDao
+import com.escorp.movieworld.data.db.TMDbDao
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -22,5 +22,6 @@ class DbModule {
 
     @Provides
     @Singleton
-    internal fun providesDatabaseDao(appDatabase: AppDatabase): DatabaseDao = appDatabase.databaseDao()
+    internal fun providesDatabaseDao(appDatabase: AppDatabase): TMDbDao =
+        appDatabase.databaseDao()
 }

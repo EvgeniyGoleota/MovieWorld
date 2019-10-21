@@ -58,14 +58,14 @@ data class MovieDetail(
     val voteCount: Int
 ) {
     fun getFormattedPosterPath(): String? {
-        if (posterPath != null && !posterPath!!.startsWith("http")) {
+        if (posterPath?.startsWith("http") == false) {
             posterPath = String.format("https://image.tmdb.org/t/p/w500%s", posterPath)
         }
         return posterPath
     }
 
     fun getFormattedBackdropPath(): String? {
-        if (backdropPath != null && !backdropPath!!.startsWith("http")) {
+        if (backdropPath?.startsWith("http") == false) {
             backdropPath = String.format("https://image.tmdb.org/t/p/w500%s", backdropPath)
         }
         return backdropPath

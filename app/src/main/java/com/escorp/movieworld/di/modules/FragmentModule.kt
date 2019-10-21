@@ -1,13 +1,13 @@
 package com.escorp.movieworld.di.modules
 
-import com.escorp.movieworld.ui.detailScreen.actorDetail.actorsInfo.ActorInfoFragment
-import com.escorp.movieworld.ui.detailScreen.actorDetail.actorsCredits.ActorCreditsFragment
-import com.escorp.movieworld.ui.detailScreen.actorDetail.actorsPhotos.ActorPhotoFragment
-import com.escorp.movieworld.ui.detailScreen.movieDetail.movieCast.MovieCastFragment
-import com.escorp.movieworld.ui.detailScreen.movieDetail.movieInfo.MovieInfoFragment
-import com.escorp.movieworld.ui.detailScreen.movieDetail.movieSimilar.SimilarMoviesFragment
-import com.escorp.movieworld.ui.mainScreen.actorsList.ActorsListFragment
-import com.escorp.movieworld.ui.mainScreen.moviesList.MoviesListFragment
+import com.escorp.movieworld.ui.detailScreen.actor.credits.ActorCreditsFragment
+import com.escorp.movieworld.ui.detailScreen.actor.info.ActorInfoFragment
+import com.escorp.movieworld.ui.detailScreen.actor.photos.ActorPhotoFragment
+import com.escorp.movieworld.ui.detailScreen.movie.cast.MovieCastFragment
+import com.escorp.movieworld.ui.detailScreen.movie.info.MovieInfoFragment
+import com.escorp.movieworld.ui.detailScreen.movie.similar.SimilarMoviesFragment
+import com.escorp.movieworld.ui.mainScreen.actors.ActorsListFragment
+import com.escorp.movieworld.ui.mainScreen.movies.MoviesListFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

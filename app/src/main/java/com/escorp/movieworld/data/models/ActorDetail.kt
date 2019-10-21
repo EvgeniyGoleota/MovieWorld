@@ -28,7 +28,7 @@ data class ActorDetail(
     var homepage: String?
 ) {
     fun getFormattedProfilePath(): String? {
-        if (profilePath != null && !profilePath!!.startsWith("http")) {
+        if (profilePath?.startsWith("http") == false) {
             profilePath = String.format("https://image.tmdb.org/t/p/w500%s", profilePath)
         }
         return profilePath

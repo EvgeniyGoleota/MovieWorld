@@ -2,7 +2,6 @@ package com.escorp.movieworld.di.components
 
 import com.escorp.movieworld.Application
 import com.escorp.movieworld.di.modules.*
-import com.escorp.movieworld.di.modules.ViewModelModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule

@@ -2,7 +2,7 @@ package com.escorp.movieworld.data.models
 
 import com.google.gson.annotations.SerializedName
 
-data class Cast (
+data class Cast(
     val id: Int,
 
     @SerializedName("cast_id")
@@ -21,9 +21,9 @@ data class Cast (
 
     @SerializedName("profile_path")
     var profilePath: String?
-)  : Comparable<Cast> {
+) : Comparable<Cast> {
     fun getFormattedProfilePath(): String? {
-        if (profilePath != null && !profilePath!!.startsWith("http")) {
+        if (profilePath?.startsWith("http") == false) {
             profilePath = String.format("https://image.tmdb.org/t/p/w500%s", profilePath)
         }
         return profilePath
