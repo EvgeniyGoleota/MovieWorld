@@ -37,6 +37,8 @@ class MoviesListViewModel @Inject constructor(private val dataRepository: DataRe
                 error.printStackTrace()
                 Log.e("MW:::", "Network error while receiving top rated movies: ${error.message}")
             }
+            .onErrorReturnItem(Response())
+            .filter { it.isSuccessful() }
             .map { movieResponse: Response<Movie> ->
                 if (movieResponse.page == 1L) dataRepository.clearMoviesCash()
                 dataRepository.saveMoviesToCash(movieResponse.results)

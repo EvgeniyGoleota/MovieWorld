@@ -35,6 +35,8 @@ class ActorsListViewModel @Inject constructor(private val dataRepository: DataRe
                 error.printStackTrace()
                 Log.e("MW:::", "Network error while receiving popular peoples: ${error.message}")
             }
+            .onErrorReturnItem(Response())
+            .filter { it.isSuccessful() }
             .map { actorResponse: Response<Actor> ->
                 if (actorResponse.page == 1L) dataRepository.clearActorsCash()
                 dataRepository.saveActorsToCash(actorResponse.results)

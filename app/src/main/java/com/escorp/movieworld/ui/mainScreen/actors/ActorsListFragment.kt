@@ -11,12 +11,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.escorp.movieworld.databinding.FragmentRecyclerViewBinding
 import com.escorp.movieworld.ui.mainScreen.MainScreenFragmentDirections
 import com.escorp.movieworld.ui.uiUtils.BaseFragment
-import com.escorp.movieworld.ui.uiUtils.RecyclerViewOnItemClickListener
 import com.escorp.movieworld.ui.uiUtils.PaginationScrollListener
+import com.escorp.movieworld.ui.uiUtils.RecyclerViewOnItemClickListener
+import com.escorp.movieworld.utils.isNetworkConnected
 import kotlinx.android.synthetic.main.fragment_recycler_view.*
 import javax.inject.Inject
 
-class ActorsListFragment : BaseFragment<ActorsListViewModel,FragmentRecyclerViewBinding>() {
+class ActorsListFragment : BaseFragment<ActorsListViewModel, FragmentRecyclerViewBinding>() {
 
     @Inject
     internal lateinit var actorListAdapter: ActorsListAdapter
@@ -38,7 +39,9 @@ class ActorsListFragment : BaseFragment<ActorsListViewModel,FragmentRecyclerView
         actorListAdapter.onItemClickListener = object :
             RecyclerViewOnItemClickListener {
             override fun onItemClick(itemId: Int, title: String) {
-                findNavController().navigate(MainScreenFragmentDirections.actionMainScreenToActorDetail(itemId, title))
+                if (context != null && isNetworkConnected(context!!)) findNavController().navigate(
+                    MainScreenFragmentDirections.actionMainScreenToActorDetail(itemId, title)
+                )
             }
         }
 
@@ -60,9 +63,12 @@ class ActorsListFragment : BaseFragment<ActorsListViewModel,FragmentRecyclerView
     }
 
     override fun initializeViewModel() {
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(ActorsListViewModel::class.java)
+        viewModel =
+            ViewModelProviders.of(this, viewModelFactory).get(ActorsListViewModel::class.java)
 
-        viewModel.pagedActorsListLiveData.observe(this, Observer { actorListAdapter.submitList(it) })
+        viewModel.pagedActorsListLiveData.observe(
+            this,
+            Observer { actorListAdapter.submitList(it) })
 
         viewModel.responseStatus.observe(this, Observer { response ->
             isLoading = false

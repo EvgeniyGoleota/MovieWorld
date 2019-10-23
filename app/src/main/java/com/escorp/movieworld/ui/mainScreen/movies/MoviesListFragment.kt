@@ -13,6 +13,7 @@ import com.escorp.movieworld.ui.mainScreen.MainScreenFragmentDirections
 import com.escorp.movieworld.ui.uiUtils.BaseFragment
 import com.escorp.movieworld.ui.uiUtils.PaginationScrollListener
 import com.escorp.movieworld.ui.uiUtils.RecyclerViewOnItemClickListener
+import com.escorp.movieworld.utils.isNetworkConnected
 import kotlinx.android.synthetic.main.fragment_recycler_view.*
 import javax.inject.Inject
 
@@ -25,7 +26,11 @@ class MoviesListFragment : BaseFragment<MoviesListViewModel, FragmentRecyclerVie
     private var isLoading = false
     private var isLastPage = false
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentRecyclerViewBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -34,7 +39,9 @@ class MoviesListFragment : BaseFragment<MoviesListViewModel, FragmentRecyclerVie
         movieListAdapter.onItemClickListener = object :
             RecyclerViewOnItemClickListener {
             override fun onItemClick(itemId: Int, title: String) {
-                findNavController().navigate(MainScreenFragmentDirections.actionMainScreenToMovieDetail(itemId, title))
+                if (context != null && isNetworkConnected(context!!)) findNavController().navigate(
+                    MainScreenFragmentDirections.actionMainScreenToMovieDetail(itemId, title)
+                )
             }
         }
 
@@ -56,8 +63,11 @@ class MoviesListFragment : BaseFragment<MoviesListViewModel, FragmentRecyclerVie
     }
 
     override fun initializeViewModel() {
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(MoviesListViewModel::class.java)
-        viewModel.pagedMoviesListLiveData.observe(this, Observer { movieListAdapter.submitList(it) })
+        viewModel =
+            ViewModelProviders.of(this, viewModelFactory).get(MoviesListViewModel::class.java)
+        viewModel.pagedMoviesListLiveData.observe(
+            this,
+            Observer { movieListAdapter.submitList(it) })
 
         viewModel.responseStatus.observe(this, Observer { response ->
             isLoading = false
