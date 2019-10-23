@@ -10,10 +10,18 @@
             android:label="Movie World">
         <action
                 android:id="@+id/action_mainScreen_to_actorDetail"
-                app:destination="@id/actorDetailFragment" />
+                app:destination="@id/actorDetailFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" />
         <action
                 android:id="@+id/action_mainScreen_to_movieDetail"
-                app:destination="@id/movieDetailFragment" />
+                app:destination="@id/movieDetailFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
             android:id="@+id/actorDetailFragment"
@@ -25,7 +33,11 @@
                 app:argType="integer" />
         <action
                 android:id="@+id/action_actorDetail_to_movieDetail"
-                app:destination="@id/movieDetailFragment" />
+                app:destination="@id/movieDetailFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" />
         <argument
                 android:name="title"
                 android:defaultValue="Movie World"
@@ -41,10 +53,18 @@
                 app:argType="integer" />
         <action
                 android:id="@+id/action_movieDetail_self"
-                app:destination="@id/movieDetailFragment" />
+                app:destination="@id/movieDetailFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" />
         <action
                 android:id="@+id/action_movieDetail_to_actorDetail"
-                app:destination="@id/actorDetailFragment" />
+                app:destination="@id/actorDetailFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"/>
         <argument
                 android:name="title"
                 android:defaultValue="Movie World"
