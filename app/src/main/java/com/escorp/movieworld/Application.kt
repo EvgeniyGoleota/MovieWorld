@@ -1,27 +1,13 @@
 package com.escorp.movieworld
 
-import android.app.Activity
-import android.app.Application
 import com.escorp.movieworld.di.components.DaggerAppComponent
 import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
-import javax.inject.Inject
+import dagger.android.DaggerApplication
 
-class Application : Application(), HasActivityInjector {
+class Application : DaggerApplication() {
 
-    @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
-
-    override fun onCreate() {
-        super.onCreate()
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> =
         DaggerAppComponent.builder()
             .application(this)
             .build()
-            .inject(this)
-    }
-
-    override fun activityInjector(): AndroidInjector<Activity> {
-        return dispatchingAndroidInjector
-    }
 }

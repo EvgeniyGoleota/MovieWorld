@@ -3,12 +3,11 @@ package com.escorp.movieworld.ui.uiUtils
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
-import dagger.android.support.AndroidSupportInjection
+import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-abstract class BaseFragment<V : ViewModel, B : ViewDataBinding> : Fragment() {
+abstract class BaseFragment<V : ViewModel, B : ViewDataBinding> : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -17,7 +16,6 @@ abstract class BaseFragment<V : ViewModel, B : ViewDataBinding> : Fragment() {
     lateinit var binding: B
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidSupportInjection.inject(this)
         super.onCreate(savedInstanceState)
         initializeViewModel()
     }
