@@ -6,11 +6,11 @@ apply from:   '../dependencies.gradle'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         applicationId "com.escorp.movieworld"
         minSdkVersion 21
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -43,7 +43,7 @@ android {
     }
 
     defaultConfig {
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 }
 
@@ -51,28 +51,52 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation kotlinDependencies
-    implementation coreAndroidDependencies
+    implementation appDependencies.kotlinLib
 
-    implementation lifecycleDependencies
-    annotationProcessor lifecycleDependenciesAnatation
+    implementation appDependencies.androidMaterial
+    implementation appDependencies.appcompat
+    implementation appDependencies.supportRecyclerView
+    implementation appDependencies.supportConstraint
+    implementation appDependencies.databindingCompiler
+    implementation appDependencies.androidxCore
+    implementation appDependencies.suportDesign
+    implementation appDependencies.fragmentKtx
 
-    implementation navigationDependencies
+    implementation appDependencies.navigationFragmentsKtx
+    implementation appDependencies.navigationUiKtx
 
-    implementation retrofitDependencies
+    implementation appDependencies.dagger
+    implementation appDependencies.daggerSupport
+    implementation appDependencies.daggerAndroid
+    kapt appDependencies.daggerCompiler
+    kapt appDependencies.daggerProcessor
 
-    implementation roomDependencies
-    kapt roomCompilerDependency
+    implementation appDependencies.rxJava
+    implementation appDependencies.rxKotlin
+    implementation appDependencies.rxAndroid
 
-    implementation rxjavaDependencies
+    implementation appDependencies.lifecycleExtensions
+    implementation appDependencies.lifecycleReactiveStreamsKtx
+    implementation appDependencies.lifecycleViewModelKtx
+    implementation appDependencies.lifecycleLiveDataKtx
 
-    implementation daggerDependencies
-    kapt daggerDependenciesAnnotation
+    implementation appDependencies.gson
+    implementation appDependencies.okHttp
+    implementation appDependencies.okHttpLoggingInterceptor
+    implementation appDependencies.retrofit2
+    implementation appDependencies.retrofit2RxJavaAdapter
+    implementation appDependencies.retrofit2GsonConverter
 
-    implementation picassoDependencies
+    implementation appDependencies.picasso
+    implementation appDependencies.pagination
 
-    implementation pagingDependencies
+    implementation appDependencies.room
+    kapt appDependencies.roomCompiler
 
-    testImplementation juntDependencies
-    androidTestImplementation androidTestDependencies
+    // unit test
+    testRuntimeOnly testDependencies.junitJupiterEngine
+    testImplementation testDependencies.junitJupiterApi
+    testImplementation testDependencies.kotlinTest
+    testImplementation testDependencies.junitJupiterParams
+    testImplementation testDependencies.nhaarmanMockitoKotlin
 }

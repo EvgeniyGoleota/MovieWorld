@@ -1,110 +1,103 @@
 ext {
-    def kotlin = "1.3.50"
-    def material = "1.0.0"
-    def appcompat = "1.0.2"
-    def constraintLayout = "1.1.3"
-    def androidxfragment = "1.2.0-alpha01"
+    // Build dependencies
+    androidMinSdkVersion = 21
+    androidTargetSdkVersion = 29
+    androidCompileSdkVersion = 29
+    androidBuildToolsVersion = '29.0.2'
 
-    def nav_version = "2.1.0"
+    //App dependencies versions
+    lifecycleVersion = '2.1.0'
+    daggerVersion = '2.25.4'
+    retrofitVersion = '2.7.1'
+    okHttpVersion = '4.3.0'
+    roomVersion = '1.1.1'
+    picassoVersion = "2.71828"
+    pagingVersion = "2.1.0"
 
-    def dagger2 = "2.23.2"
+    appDependencies = [
+            kotlinLib                   : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}",
 
-    def lifecycle = "1.1.1"
+            //Support libraries
+            androidMaterial             : "com.google.android.material:material:1.0.0",
+            appcompat                   : "androidx.appcompat:appcompat:1.1.0",
+            supportRecyclerView         : "androidx.recyclerview:recyclerview:1.1.0",
+            supportConstraint           : "androidx.constraintlayout:constraintlayout:1.1.3",
+            databindingCompiler         : "com.android.databinding:compiler:$androidGragleBuildVersion",
+            androidxCore                : "androidx.core:core-ktx:1.1.0",
+            suportDesign                : "com.android.support:design:1.1.0",
+            fragmentKtx                 : "androidx.fragment:fragment-ktx:1.2.0-alpha01",
 
-    def gson = "2.8.5"
-    def retrofit = "2.4.0"
-    def loggingInterseptor = "3.9.1"
+            // Android-UI
+            lifecycleExtensions         : "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion",
+            lifecycleViewModelKtx       : "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion",
+            lifecycleLiveDataKtx        : "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion",
+            lifecycleReactiveStreamsKtx : "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycleVersion",
 
-    def room = "1.1.1"
+            //Navigation
+            navigationFragmentsKtx      : "androidx.navigation:navigation-fragment-ktx:$navigationVersion",
+            navigationUiKtx             : "androidx.navigation:navigation-ui-ktx:$navigationVersion",
 
-    def rxjava = "2.1.12"
-    def rxandroid = "2.0.2"
+            // DI
+            dagger                      : "com.google.dagger:dagger:$daggerVersion",
+            daggerCompiler              : "com.google.dagger:dagger-compiler:$daggerVersion",
+            daggerAndroid               : "com.google.dagger:dagger-android:$daggerVersion",
+            daggerSupport               : "com.google.dagger:dagger-android-support:${daggerVersion}",
+            daggerProcessor             : "com.google.dagger:dagger-android-processor:${daggerVersion}",
 
-    def picasso = "2.71828"
+            // Network
+            gson                        : "com.google.code.gson:gson:2.8.5",
+            okHttp                      : "com.squareup.okhttp3:okhttp:$okHttpVersion",
+            okHttpLoggingInterceptor    : "com.squareup.okhttp3:logging-interceptor:$okHttpVersion",
+            retrofit2                   : "com.squareup.retrofit2:retrofit:$retrofitVersion",
+            retrofit2RxJavaAdapter      : "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion",
+            retrofit2GsonConverter      : "com.squareup.retrofit2:converter-gson:$retrofitVersion",
 
-    def paging = "2.1.0"
+            // Room
+            room                        : "android.arch.persistence.room:runtime:${roomVersion}",
+            roomCompiler                : "android.arch.persistence.room:compiler:${roomVersion}",
 
-    def junit_version = "4.12"
-    def runner_version = "1.0.2"
-    def espresso_core_version = "3.0.2"
+            // Reactive
+            rxJava                      : "io.reactivex.rxjava2:rxjava:2.2.15",
+            rxKotlin                    : "io.reactivex.rxjava2:rxkotlin:2.4.0",
+            rxAndroid                   : "io.reactivex.rxjava2:rxandroid:2.1.1",
+            rxPreferences               : "com.f2prateek.rx.preferences2:rx-preferences:2.0.0",
 
-    kotlinDependencies = [
-            "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin}"
+            // Images loading
+            picasso                     : "com.squareup.picasso:picasso:$picassoVersion",
+
+            // Pagination
+            pagination                  : "androidx.paging:paging-runtime:$pagingVersion"
     ]
 
-    coreAndroidDependencies = [
-            "com.google.android.material:material:${material}",
-            "androidx.appcompat:appcompat:${appcompat}",
-            "androidx.core:core-ktx:${appcompat}",
-            "com.android.support:design:${appcompat}",
-            "androidx.constraintlayout:constraintlayout:${constraintLayout}",
-            "com.android.support:recyclerview-v7:${appcompat}",
-            "androidx.fragment:fragment-ktx:${androidxfragment}"
-    ]
+    // Test dependencies
+    espressoVersion = "3.2.0"
+    junitJupiterVersion = "5.5.2"
+    androidTestVersion = "1.2.0"
+    androidTestUiautomatorVersion = "2.2.0"
 
-    lifecycleDependencies = [
-            "android.arch.lifecycle:extensions:${lifecycle}",
-            "android.arch.lifecycle:reactivestreams:${lifecycle}"
-    ]
+    testDependencies = [
+            junitJupiterApi        : "org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion",
+            junitJupiterEngine     : "org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion",
+            junitJupiterParams     : "org.junit.jupiter:junit-jupiter-params:$junitJupiterVersion",
 
-    lifecycleDependenciesAnatation = [
-            "android.arch.lifecycle:compiler:${lifecycle}"
-    ]
+            kotlinTest             : "org.jetbrains.kotlin:kotlin-test:$kotlinVersion",
+            kotlinTestJunit        : "org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion",
+            nhaarmanMockitoKotlin  : "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0",
+            androidTestUiautomator : "androidx.test.uiautomator:uiautomator:$androidTestUiautomatorVersion",
 
-    navigationDependencies = [
-            "androidx.navigation:navigation-fragment-ktx:$nav_version",
-            "androidx.navigation:navigation-ui-ktx:$nav_version"
-    ]
-
-    retrofitDependencies = [
-            "com.google.code.gson:gson:${gson}",
-            "com.squareup.retrofit2:retrofit:${retrofit}",
-            "com.squareup.retrofit2:converter-gson:${retrofit}",
-            "com.squareup.retrofit2:adapter-rxjava2:${retrofit}",
-            "com.squareup.okhttp3:logging-interceptor:${loggingInterseptor}"
-    ]
-
-    roomDependencies = [
-            "android.arch.persistence.room:runtime:${room}"
-    ]
-
-    roomCompilerDependency = [
-            "android.arch.persistence.room:compiler:${room}"
-    ]
-
-    rxjavaDependencies = [
-            "io.reactivex.rxjava2:rxjava:${rxjava}",
-            "io.reactivex.rxjava2:rxandroid:${rxandroid}",
-            "com.squareup.retrofit2:adapter-rxjava2:2.3.0"
-    ]
-
-    daggerDependencies = [
-            "com.google.dagger:dagger:${dagger2}",
-            "com.google.dagger:dagger-android:${dagger2}",
-            "com.google.dagger:dagger-android-support:${dagger2}"
-    ]
-
-    daggerDependenciesAnnotation = [
-            "com.google.dagger:dagger-compiler:${dagger2}",
-            "com.google.dagger:dagger-android-processor:${dagger2}",
-            "com.google.dagger:dagger-android-support:${dagger2}"
-    ]
-
-    picassoDependencies = [
-            "com.squareup.picasso:picasso:$picasso"
-    ]
-
-    pagingDependencies = [
-            "androidx.paging:paging-runtime:$paging"
-    ]
-
-    juntDependencies = [
-            "junit:junit:${junit_version}",
-            "androidx.paging:paging-common:$paging"
-    ]
-
-    androidTestDependencies = [
-            "com.android.support.test:runner:${runner_version}",
-            "com.android.support.test.espresso:espresso-core:${espresso_core_version}"
+            // Espresso-only
+            androidTestCore        : "androidx.test:core:$androidTestVersion",
+            androidTestOrchestrator: "androidx.test:orchestrator:$androidTestVersion",
+            espressoCore           : "androidx.test.espresso:espresso-core:$espressoVersion",
+            espressoIntents        : "androidx.test.espresso:espresso-intents:$espressoVersion",
+            espressoContrib        : "androidx.test.espresso:espresso-contrib:$espressoVersion",
+            okHttpMockWebserver    : "com.squareup.okhttp3:mockwebserver:$okHttpVersion",
+            okHttpTls              : "com.squareup.okhttp3:okhttp-tls:$okHttpVersion",
+            // Please update and fix the issue.
+            // "rxJavaIdler" version "0.10.0" make error:
+            // Unable to uninstall com.godeltech.family.debug.test
+            // com.android.ddmlib.InstallException: device offline
+            rxJavaIdler            : "com.squareup.rx.idler:rx2-idler:0.9.1",
+            okHttpIdlingResource   : "com.jakewharton.espresso:okhttp3-idling-resource:1.0.0"
     ]
 }

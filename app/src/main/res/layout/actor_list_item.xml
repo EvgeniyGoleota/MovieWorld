@@ -14,11 +14,12 @@
     </data>
 
     <LinearLayout
+            android:id="@+id/actor_list_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="@{() -> onClickListener.onItemClick(actor.id, actor.name)}"
             android:orientation="vertical"
-            android:padding="5dp"
-            android:onClick="@{() -> onClickListener.onItemClick(actor.id, actor.name)}">
+            android:padding="5dp">
 
         <ImageView
                 android:id="@+id/item_image"
