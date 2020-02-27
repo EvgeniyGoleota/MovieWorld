@@ -17,7 +17,12 @@ class SimilarMovieDataSourceFactory(
     var latestSource: SimilarMoviesDataSource? = null
 
     override fun create(): DataSource<Int, Movie> {
-        latestSource = SimilarMoviesDataSource(movieId, dataRepository, compositeDisposable)
+        latestSource =
+            SimilarMoviesDataSource(
+                movieId,
+                dataRepository,
+                compositeDisposable
+            )
         sourceLiveData.postValue(latestSource)
         return latestSource!!
     }

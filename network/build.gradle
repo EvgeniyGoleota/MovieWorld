@@ -1,0 +1,57 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply from:   '../dependencies.gradle'
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+            resValue "string", "TMDbApiKey", "ed5e7f6f96b248cf13efb41458ee4986"
+            resValue "string", "serverAdderss", "https://api.themoviedb.org/3/"
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            resValue "string", "TMDbApiKey", "ed5e7f6f96b248cf13efb41458ee4986"
+            resValue "string", "serverAdderss", "https://api.themoviedb.org/3/"
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation appDependencies.kotlinLib
+
+    implementation appDependencies.dagger
+    implementation appDependencies.daggerSupport
+    implementation appDependencies.daggerAndroid
+    kapt appDependencies.daggerCompiler
+    kapt appDependencies.daggerProcessor
+
+    implementation appDependencies.gson
+    implementation appDependencies.okHttp
+    implementation appDependencies.okHttpLoggingInterceptor
+    implementation appDependencies.retrofit2
+    implementation appDependencies.retrofit2RxJavaAdapter
+    implementation appDependencies.retrofit2GsonConverter
+
+    implementation appDependencies.room
+    kapt appDependencies.roomCompiler
+}

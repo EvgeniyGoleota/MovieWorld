@@ -1,7 +1,7 @@
 package com.escorp.movieworld.di.modules
 
 import androidx.room.Room
-import com.escorp.movieworld.Application
+import com.escorp.movieworld.MovieWorldApplication
 import com.escorp.movieworld.data.db.AppDatabase
 import com.escorp.movieworld.data.db.TMDbDao
 import dagger.Module
@@ -13,7 +13,7 @@ class DbModule {
 
     @Provides
     @Singleton
-    internal fun providesAppDatabase(application: Application): AppDatabase =
+    internal fun providesAppDatabase(application: MovieWorldApplication): AppDatabase =
         Room.databaseBuilder(
             application,
             AppDatabase::class.java,

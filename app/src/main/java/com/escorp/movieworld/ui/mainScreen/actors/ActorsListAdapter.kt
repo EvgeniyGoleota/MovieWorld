@@ -8,7 +8,8 @@ import com.escorp.movieworld.data.models.Actor
 import com.escorp.movieworld.databinding.ActorListItemBinding
 import com.escorp.movieworld.ui.uiUtils.RecyclerViewOnItemClickListener
 
-class ActorsListAdapter : PagedListAdapter<Actor, ActorsListAdapter.ViewHolder>(Actor.diffCallback) {
+class ActorsListAdapter : PagedListAdapter<Actor, ActorsListAdapter.ViewHolder>(
+    Actor.diffCallback) {
 
     var onItemClickListener: RecyclerViewOnItemClickListener? = null
 

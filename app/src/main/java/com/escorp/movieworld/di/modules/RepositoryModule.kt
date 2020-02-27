@@ -22,7 +22,8 @@ class RepositoryModule {
     internal fun providesDataRepository(
         movieApi: MovieApi,
         databaseDao: TMDbDao
-    ): DataRepository = object : DataRepository {
+    ): DataRepository = object :
+        DataRepository {
 
         override fun getTopRatedMovies(page: Int) = movieApi.getTopRatedMovies(page)
 

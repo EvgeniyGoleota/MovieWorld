@@ -1,4 +1,4 @@
-package com.escorp.movieworld.data.api
+package com.escorp.movieworld.network.interceptor
 
 import okhttp3.Interceptor
 import okhttp3.Response

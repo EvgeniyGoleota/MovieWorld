@@ -16,7 +16,12 @@ class SimilarMoviesViewModel @Inject constructor(private val dataRepository: Dat
     private lateinit var similarMoviesList: LiveData<PagedList<Movie>>
 
     fun getSimilarMovies(movieId: Int): LiveData<PagedList<Movie>> {
-        dataSourceFactory = SimilarMovieDataSourceFactory(movieId, dataRepository, compositeDisposable)
+        dataSourceFactory =
+            SimilarMovieDataSourceFactory(
+                movieId,
+                dataRepository,
+                compositeDisposable
+            )
         similarMoviesList = dataRepository.getPagedSimilarMoviesListLiveData(dataSourceFactory)
         return similarMoviesList
     }
