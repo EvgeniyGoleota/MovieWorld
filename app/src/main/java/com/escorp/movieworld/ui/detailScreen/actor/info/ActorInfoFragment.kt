@@ -36,6 +36,4 @@ class ActorInfoFragment : BaseFragment<ActorInfoViewModel, FragmentActorInfoBind
 
          if (isIdValid(personId)) viewModel.retrievePersonDetails(personId!!)
     }
-
-    override fun initializeView() {}
 }

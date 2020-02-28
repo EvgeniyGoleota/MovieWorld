@@ -8,13 +8,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.escorp.movieworld.databinding.FragmentRecyclerViewBinding
+import com.escorp.movieworld.core.databinding.FragmentRecyclerViewBinding
 import com.escorp.movieworld.ui.detailScreen.movie.MovieDetailFragmentDirections
 import com.escorp.movieworld.ui.uiUtils.BaseFragment
 import com.escorp.movieworld.utils.ID
 import com.escorp.movieworld.ui.uiUtils.RecyclerViewOnItemClickListener
 import com.escorp.movieworld.utils.isIdValid
-import kotlinx.android.synthetic.main.fragment_recycler_view.*
 import javax.inject.Inject
 
 class MovieCastFragment : BaseFragment<MovieCastViewModel, FragmentRecyclerViewBinding>() {
@@ -39,14 +38,14 @@ class MovieCastFragment : BaseFragment<MovieCastViewModel, FragmentRecyclerViewB
         return binding.recyclerView
     }
 
-    override  fun initializeView() {
+    override  fun FragmentRecyclerViewBinding.initializeView() {
         movieCastListAdapter.onItemClickListener = object :
             RecyclerViewOnItemClickListener {
             override fun onItemClick(itemId: Int, title: String) {
                 findNavController().navigate(MovieDetailFragmentDirections.actionMovieDetailToActorDetail(itemId, title))
             }
         }
-        recycler_view.apply {
+        recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = movieCastListAdapter
         }

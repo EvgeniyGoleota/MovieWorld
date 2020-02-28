@@ -8,13 +8,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.escorp.movieworld.databinding.FragmentRecyclerViewBinding
+import com.escorp.movieworld.core.databinding.FragmentRecyclerViewBinding
 import com.escorp.movieworld.ui.mainScreen.MainScreenFragmentDirections
 import com.escorp.movieworld.ui.uiUtils.BaseFragment
 import com.escorp.movieworld.ui.uiUtils.PaginationScrollListener
 import com.escorp.movieworld.ui.uiUtils.RecyclerViewOnItemClickListener
 import com.escorp.movieworld.utils.isNetworkConnected
-import kotlinx.android.synthetic.main.fragment_recycler_view.*
 import javax.inject.Inject
 
 class MoviesListFragment : BaseFragment<MoviesListViewModel, FragmentRecyclerViewBinding>() {
@@ -35,7 +34,7 @@ class MoviesListFragment : BaseFragment<MoviesListViewModel, FragmentRecyclerVie
         return binding.root
     }
 
-    override fun initializeView() {
+    override fun FragmentRecyclerViewBinding.initializeView() {
         movieListAdapter.onItemClickListener = object :
             RecyclerViewOnItemClickListener {
             override fun onItemClick(itemId: Int, title: String) {
@@ -45,7 +44,7 @@ class MoviesListFragment : BaseFragment<MoviesListViewModel, FragmentRecyclerVie
             }
         }
 
-        recycler_view.apply {
+        recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = movieListAdapter
             addOnScrollListener(object : PaginationScrollListener(layoutManager) {

@@ -22,10 +22,10 @@ abstract class BaseFragment<V : ViewModel, B : ViewDataBinding> : DaggerFragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initializeView()
+        binding.initializeView()
     }
 
     abstract fun initializeViewModel()
 
-    abstract fun initializeView()
+    protected open fun B.initializeView() {}
 }

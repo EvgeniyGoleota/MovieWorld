@@ -7,14 +7,13 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.escorp.movieworld.databinding.FragmentRecyclerViewBinding
+import com.escorp.movieworld.core.databinding.FragmentRecyclerViewBinding
 import com.escorp.movieworld.ui.detailScreen.actor.ActorDetailFragmentDirections
 import com.escorp.movieworld.ui.uiUtils.BaseFragment
 import com.escorp.movieworld.utils.ID
 import com.escorp.movieworld.ui.uiUtils.RecyclerViewOnItemClickListener
 import com.escorp.movieworld.utils.injectViewModel
 import com.escorp.movieworld.utils.isIdValid
-import kotlinx.android.synthetic.main.fragment_recycler_view.*
 import javax.inject.Inject
 
 class ActorCreditsFragment : BaseFragment<ActorCreditsViewModel, FragmentRecyclerViewBinding>() {
@@ -39,7 +38,7 @@ class ActorCreditsFragment : BaseFragment<ActorCreditsViewModel, FragmentRecycle
         return binding.root
     }
 
-    override fun initializeView() {
+    override fun FragmentRecyclerViewBinding.initializeView() {
         creditsListAdapter.onClickListener = object :
             RecyclerViewOnItemClickListener {
             override fun onItemClick(itemId: Int, title: String) {
@@ -47,7 +46,7 @@ class ActorCreditsFragment : BaseFragment<ActorCreditsViewModel, FragmentRecycle
             }
 
         }
-        recycler_view.apply {
+        recyclerView.apply {
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = creditsListAdapter
         }

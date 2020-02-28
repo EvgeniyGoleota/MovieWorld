@@ -5,16 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.escorp.movieworld.databinding.FragmentViewPagerBinding
-import kotlinx.android.synthetic.main.fragment_view_pager.*
+import com.escorp.movieworld.core.databinding.FragmentViewPagerBinding
 
 abstract class BasePagerFragment : Fragment() {
+
+    private lateinit var binding: FragmentViewPagerBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = FragmentViewPagerBinding.inflate(inflater, container, false).root
+    ): View? {
+        binding = FragmentViewPagerBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -22,8 +26,8 @@ abstract class BasePagerFragment : Fragment() {
     }
 
     private fun initTabs() {
-        pager.adapter = createPagerAdapter()
-        tab_layout.setupWithViewPager(pager)
+        binding.pager.adapter = createPagerAdapter()
+        binding.tabLayout.setupWithViewPager(binding.pager)
     }
 
     abstract fun createPagerAdapter(): PagerAdapter

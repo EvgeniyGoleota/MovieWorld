@@ -35,6 +35,4 @@ class MovieInfoFragment : BaseFragment<MovieInfoViewModel, FragmentMovieInfoBind
 
         if (isIdValid(movieId)) viewModel.getMovieDetails(movieId!!)
     }
-
-    override fun initializeView() {}
 }

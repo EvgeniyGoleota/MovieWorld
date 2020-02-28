@@ -8,14 +8,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.escorp.movieworld.databinding.FragmentRecyclerViewBinding
+import com.escorp.movieworld.core.databinding.FragmentRecyclerViewBinding
 import com.escorp.movieworld.ui.detailScreen.movie.MovieDetailFragmentDirections
 import com.escorp.movieworld.ui.mainScreen.movies.MoviesListAdapter
 import com.escorp.movieworld.ui.uiUtils.BaseFragment
 import com.escorp.movieworld.utils.ID
 import com.escorp.movieworld.ui.uiUtils.RecyclerViewOnItemClickListener
 import com.escorp.movieworld.utils.isIdValid
-import kotlinx.android.synthetic.main.fragment_recycler_view.*
 import javax.inject.Inject
 
 class SimilarMoviesFragment : BaseFragment<SimilarMoviesViewModel, FragmentRecyclerViewBinding>() {
@@ -40,20 +39,6 @@ class SimilarMoviesFragment : BaseFragment<SimilarMoviesViewModel, FragmentRecyc
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        moviesListAdapter.onItemClickListener = object :
-            RecyclerViewOnItemClickListener {
-            override fun onItemClick(itemId: Int, title: String) {
-                findNavController().navigate(MovieDetailFragmentDirections.actionMovieDetailSelf(itemId, title))
-            }
-        }
-        recycler_view.apply {
-            layoutManager = GridLayoutManager(context, 2)
-            adapter = moviesListAdapter
-        }
-    }
-
     override fun initializeViewModel() {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(SimilarMoviesViewModel::class.java)
 
@@ -64,5 +49,16 @@ class SimilarMoviesFragment : BaseFragment<SimilarMoviesViewModel, FragmentRecyc
         }
     }
 
-    override fun initializeView() {}
+    override fun FragmentRecyclerViewBinding.initializeView() {
+        moviesListAdapter.onItemClickListener = object :
+            RecyclerViewOnItemClickListener {
+            override fun onItemClick(itemId: Int, title: String) {
+                findNavController().navigate(MovieDetailFragmentDirections.actionMovieDetailSelf(itemId, title))
+            }
+        }
+        recyclerView.apply {
+            layoutManager = GridLayoutManager(context, 2)
+            adapter = moviesListAdapter
+        }
+    }
 }

@@ -7,12 +7,11 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
-import com.escorp.movieworld.databinding.FragmentRecyclerViewBinding
+import com.escorp.movieworld.core.databinding.FragmentRecyclerViewBinding
 import com.escorp.movieworld.ui.uiUtils.BaseFragment
 import com.escorp.movieworld.utils.ID
 import com.escorp.movieworld.ui.uiUtils.RecyclerViewOnItemClickListener
 import com.escorp.movieworld.utils.isIdValid
-import kotlinx.android.synthetic.main.fragment_recycler_view.*
 import javax.inject.Inject
 
 class ActorPhotoFragment : BaseFragment<ActorPhotoViewModel, FragmentRecyclerViewBinding>() {
@@ -37,14 +36,14 @@ class ActorPhotoFragment : BaseFragment<ActorPhotoViewModel, FragmentRecyclerVie
         return binding.root
     }
 
-    override fun initializeView() {
+    override fun FragmentRecyclerViewBinding.initializeView() {
         photoListAdapter.onItemClickListener = object :
             RecyclerViewOnItemClickListener {
             override fun onItemClick(itemId: Int, title: String) {
 
             }
         }
-        recycler_view.apply {
+        recyclerView.apply {
             adapter = photoListAdapter
             layoutManager = GridLayoutManager(context, 2)
         }
