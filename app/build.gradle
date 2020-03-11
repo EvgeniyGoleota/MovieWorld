@@ -26,16 +26,6 @@ android {
         }
     }
 
-//    flavorDimensions 'environment'
-//    productFlavors {
-//        develop {
-//            dimension 'environment'
-//        }
-//        production {
-//            dimension 'environment'
-//        }
-//    }
-
     dataBinding {
         enabled = true
     }
@@ -50,6 +40,11 @@ android {
 
     defaultConfig {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
     }
 }
 

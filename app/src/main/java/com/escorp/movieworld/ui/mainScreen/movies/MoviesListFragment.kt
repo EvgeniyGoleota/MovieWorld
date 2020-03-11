@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.escorp.movieworld.core.databinding.FragmentRecyclerViewBinding
-import com.escorp.movieworld.ui.mainScreen.MainScreenFragmentDirections
 import com.escorp.movieworld.ui.uiUtils.BaseFragment
 import com.escorp.movieworld.ui.uiUtils.PaginationScrollListener
 import com.escorp.movieworld.ui.uiUtils.RecyclerViewOnItemClickListener
@@ -39,7 +38,7 @@ class MoviesListFragment : BaseFragment<MoviesListViewModel, FragmentRecyclerVie
             RecyclerViewOnItemClickListener {
             override fun onItemClick(itemId: Int, title: String) {
                 if (context != null && isNetworkConnected(context!!)) findNavController().navigate(
-                    MainScreenFragmentDirections.actionMainScreenToMovieDetail(itemId, title)
+                    MoviesListFragmentDirections.actionMoviesToMovieDetail(itemId, title)
                 )
             }
         }
