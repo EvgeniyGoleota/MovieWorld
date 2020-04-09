@@ -1,14 +1,41 @@
 import androidx.paging.PagedList
-import com.escorp.movieworld.data.models.Actor
-import com.escorp.movieworld.data.models.Movie
+import com.escorp.movieworld.network.api.dto.actors.Actor
+import com.escorp.movieworld.network.api.dto.movies.Movie
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import org.mockito.ArgumentMatchers
 
 fun mockMovie() =
-    Movie(1, 1, "", "", "", "", "", emptyList(), "", "", 0, "", 0.0, 0, false, 0.0, "", emptyList())
+    Movie(
+        1,
+        1,
+        "",
+        "",
+        "",
+        "",
+        "",
+        emptyList(),
+        "",
+        "",
+        0,
+        "",
+        0.0,
+        0,
+        false,
+        0.0,
+        "",
+        emptyList()
+    )
 
-fun mockActor() = Actor(1, 1, "", "", 0.0, emptyList())
+fun mockActor() =
+    Actor(
+        1,
+        1,
+        "",
+        "",
+        0.0,
+        emptyList()
+    )
 
 fun mockMovieList() = ArrayList<Movie>().apply {
     add(mockMovie())

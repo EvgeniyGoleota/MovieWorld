@@ -1,0 +1,98 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply from:   '../dependencies.gradle'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
+    defaultConfig {
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+}
+
+dependencies {
+    implementation project(':network')
+    implementation project(':core')
+
+    implementation appDependencies.kotlinLib
+
+    implementation appDependencies.androidMaterial
+    implementation appDependencies.appcompat
+    implementation appDependencies.supportRecyclerView
+    implementation appDependencies.supportConstraint
+    implementation appDependencies.databindingCompiler
+    implementation appDependencies.androidxCore
+    implementation appDependencies.suportDesign
+    implementation appDependencies.fragmentKtx
+
+    implementation appDependencies.navigationFragmentsKtx
+    implementation appDependencies.navigationUiKtx
+
+    implementation appDependencies.dagger
+    implementation appDependencies.daggerSupport
+    implementation appDependencies.daggerAndroid
+    kapt appDependencies.daggerCompiler
+    kapt appDependencies.daggerProcessor
+
+    implementation appDependencies.rxJava
+    implementation appDependencies.rxKotlin
+    implementation appDependencies.rxAndroid
+
+    implementation appDependencies.lifecycleExtensions
+    implementation appDependencies.lifecycleReactiveStreamsKtx
+    implementation appDependencies.lifecycleViewModelKtx
+    implementation appDependencies.lifecycleLiveDataKtx
+
+    implementation appDependencies.picasso
+    implementation appDependencies.pagination
+
+    implementation appDependencies.room
+    kapt appDependencies.roomCompiler
+
+    // unit test
+    testRuntimeOnly testDependencies.junitJupiterEngine
+    testImplementation testDependencies.junitJupiterApi
+    testImplementation testDependencies.kotlinTest
+    testImplementation testDependencies.junitJupiterParams
+    testImplementation testDependencies.nhaarmanMockitoKotlin
+}

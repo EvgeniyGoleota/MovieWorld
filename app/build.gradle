@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply from:   '../dependencies.gradle'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
@@ -52,6 +51,8 @@ android {
 dependencies {
     implementation project(':network')
     implementation project(':core')
+    implementation project(':feature_actor')
+    implementation project(':feature_movie')
 
     implementation appDependencies.kotlinLib
 
@@ -83,9 +84,6 @@ dependencies {
     implementation appDependencies.lifecycleLiveDataKtx
 
     implementation appDependencies.retrofit2
-
-    implementation appDependencies.picasso
-    implementation appDependencies.pagination
 
     implementation appDependencies.room
     kapt appDependencies.roomCompiler

@@ -8,7 +8,7 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.escorp.movieworld.R
-import com.escorp.movieworld.ui.MainActivity
+import com.escorp.movieworld.MainActivity
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -17,7 +17,8 @@ import org.junit.runner.RunWith
 class BasePagerFragmentTest {
 
     @get:Rule
-    var activityRule: ActivityTestRule<MainActivity> = ActivityTestRule(MainActivity::class.java)
+    var activityRule: ActivityTestRule<MainActivity> = ActivityTestRule(
+        MainActivity::class.java)
 
     @Test
     fun checkTabLayoutDisplayed() {

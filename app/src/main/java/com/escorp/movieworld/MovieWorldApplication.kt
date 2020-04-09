@@ -1,16 +1,22 @@
 package com.escorp.movieworld
 
-import com.escorp.movieworld.network.dagger.DaggerDataComponent
-import com.escorp.movieworld.network.dagger.DataComponent
-import com.escorp.movieworld.di.components.AppComponent
-import com.escorp.movieworld.di.components.DaggerAppComponent
-import dagger.android.AndroidInjector
-import dagger.android.DaggerApplication
+import android.app.Application
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentFactory
+import com.escorp.movieworld.actors.dagger.DaggerActorsComponent
+import com.escorp.movieworld.core.dagger.CoreComponent
+import com.escorp.movieworld.core.dagger.DaggerCoreComponent
+import com.escorp.movieworld.core.dagger.fragment.DelegateFragmentFactory
+import com.escorp.movieworld.network.dagger.NetworkComponent
+import com.escorp.movieworld.movies.dagger.DaggerMoviesComponent
+import com.escorp.movieworld.network.dagger.DaggerNetworkComponent
 
-class MovieWorldApplication : DaggerApplication(){
+class MovieWorldApplication : Application() {
 
-    private lateinit var dataComponent: DataComponent
-    private lateinit var appComponent: AppComponent
+    private lateinit var networkComponent: NetworkComponent
+    private lateinit var coreComponent: CoreComponent
+
+    private lateinit var fragmentFactory: FragmentFactory
 
     override fun onCreate() {
         setupComponents()
@@ -18,22 +24,40 @@ class MovieWorldApplication : DaggerApplication(){
     }
 
     private fun setupComponents() {
-        setupDataComponent()
-        setupAppComponent()
+        coreComponent = DaggerCoreComponent.builder().build()
+        setupNetworkComponent()
+        setupFragmentFactory()
     }
 
-    private fun setupAppComponent() {
-        appComponent = DaggerAppComponent.builder()
-            .application(this)
-            .dataComponent(dataComponent)
-            .build()
+    private fun setupFragmentFactory() {
+        fragmentFactory = buildFragmentFactory()
+        registerActivityLifecycleCallbacks(OnActivityCreatedLifecycleCallbacks {
+            (it as? FragmentActivity?)?.let { fragmentActivity ->
+                fragmentActivity.supportFragmentManager.fragmentFactory = fragmentFactory
+            }
+        })
     }
 
-    private fun setupDataComponent() {
-        dataComponent = DaggerDataComponent.builder()
+    private fun buildFragmentFactory(): FragmentFactory =
+        DelegateFragmentFactory(
+            listOf(
+                DaggerActorsComponent.builder()
+                    .networkComponent(networkComponent)
+                    .coreComponent(coreComponent)
+                    .build()
+                    .provideFragmentFactory(),
+
+                DaggerMoviesComponent.builder()
+                    .bindNetworkComponent(networkComponent)
+                    .coreComponent(coreComponent)
+                    .build()
+                    .provideFragmentFactory()
+            )
+        )
+
+    private fun setupNetworkComponent() {
+        networkComponent = DaggerNetworkComponent.builder()
             .bindContext(this)
             .build()
     }
-
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication>? = appComponent
 }

@@ -7,7 +7,8 @@ import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.rule.ActivityTestRule
 import com.escorp.movieworld.R
-import com.escorp.movieworld.ui.MainActivity
+import com.escorp.movieworld.actors.list.ui.ActorsListAdapter
+import com.escorp.movieworld.MainActivity
 import com.escorp.movieworld.withViewAtPosition
 import org.hamcrest.Matchers.allOf
 import org.junit.Assert.*
@@ -17,7 +18,8 @@ import org.junit.Test
 class ActorsListFragmentTest {
 
     @get:Rule
-    var activityRule: ActivityTestRule<MainActivity> = ActivityTestRule(MainActivity::class.java)
+    var activityRule: ActivityTestRule<MainActivity> = ActivityTestRule(
+        MainActivity::class.java)
 
     @Test
     fun checkRVOnItemClick() {

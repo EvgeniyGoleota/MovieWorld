@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ui.MainActivity">
+        tools:context=".MainActivity">
 
     <fragment
             android:id="@+id/main_content"
@@ -16,8 +16,7 @@
             app:layout_constraintBottom_toTopOf="@+id/navigation_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:navGraph="@navigation/main_activity_nav_graph" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navigation_view"

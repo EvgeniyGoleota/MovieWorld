@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply from:   '../dependencies.gradle'
 
@@ -32,7 +31,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':network')
 
     implementation appDependencies.androidMaterial
     implementation appDependencies.appcompat
@@ -42,4 +41,16 @@ dependencies {
     implementation appDependencies.androidxCore
     implementation appDependencies.suportDesign
     implementation appDependencies.fragmentKtx
+
+    implementation appDependencies.dagger
+    implementation appDependencies.daggerSupport
+    implementation appDependencies.daggerAndroid
+    kapt appDependencies.daggerCompiler
+    kapt appDependencies.daggerProcessor
+
+    implementation appDependencies.picasso
+
+    implementation appDependencies.rxJava
+    implementation appDependencies.rxKotlin
+    implementation appDependencies.rxAndroid
 }

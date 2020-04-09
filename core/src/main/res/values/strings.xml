@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="all_retry">Retry</string>
+    <string name="all_cancel">Cancel</string>
+
+    <string name="dialog_recoverable_title">Something happened!</string>
+    <string name="dialog_recoverable_message_generic">Something must have gone wrong… Technical description: %s</string>
+</resources>

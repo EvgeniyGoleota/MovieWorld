@@ -4,9 +4,9 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.matcher.BoundedMatcher
 import androidx.viewpager.widget.ViewPager
-import com.escorp.movieworld.ui.mainScreen.actors.ActorsListFragment
-import com.escorp.movieworld.ui.mainScreen.movies.MoviesListFragment
-import com.escorp.movieworld.ui.uiUtils.PagerAdapter
+import com.escorp.movieworld.actors.list.ui.ActorListFragment
+import com.escorp.movieworld.movies.list.ui.MovieListFragment
+import com.escorp.movieworld.core.ui.PagerAdapter
 import com.google.android.material.tabs.TabLayout
 import org.hamcrest.Description
 import org.hamcrest.Matcher
@@ -36,7 +36,7 @@ fun isActorsListFragment(): Matcher<View> =
         }
 
         override fun matchesSafely(item: ViewPager?) =
-            item?.let { (it.adapter as PagerAdapter?)?.getItem(it.currentItem) is ActorsListFragment } ?: false
+            item?.let { (it.adapter as PagerAdapter?)?.getItem(it.currentItem) is ActorListFragment } ?: false
     }
 
 fun isMoviesListFragment(): Matcher<View> =
@@ -46,7 +46,7 @@ fun isMoviesListFragment(): Matcher<View> =
         }
 
         override fun matchesSafely(item: ViewPager?) =
-            item?.let { (it.adapter as PagerAdapter?)?.getItem(it.currentItem) is MoviesListFragment } ?: false
+            item?.let { (it.adapter as PagerAdapter?)?.getItem(it.currentItem) is MovieListFragment } ?: false
     }
 
 fun withViewAtPosition(position: Int, itemMatcher: Matcher<View>) = object : BoundedMatcher<View, RecyclerView>(RecyclerView::class.java) {

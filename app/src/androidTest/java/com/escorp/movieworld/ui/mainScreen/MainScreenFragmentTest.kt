@@ -6,7 +6,7 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.rule.ActivityTestRule
 import com.escorp.movieworld.*
-import com.escorp.movieworld.ui.MainActivity
+import com.escorp.movieworld.MainActivity
 import org.hamcrest.Matchers.allOf
 
 import org.junit.Rule
@@ -15,7 +15,8 @@ import org.junit.Test
 class MainScreenFragmentTest {
 
     @get:Rule
-    var activityRule: ActivityTestRule<MainActivity> = ActivityTestRule(MainActivity::class.java)
+    var activityRule: ActivityTestRule<MainActivity> = ActivityTestRule(
+        MainActivity::class.java)
 
     @Test
     fun checkTabAndPageCount() {

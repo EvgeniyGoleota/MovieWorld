@@ -23,18 +23,18 @@ private const val OK_HTTP_CACHE_SIZE = 10L * 1024L * 1024L
 internal class NetworkModule {
 
     @Provides
-    @DataScope
+    @NetworkScope
     internal fun providesGson(): Gson = GsonBuilder().create()
 
     @Provides
-    @DataScope
+    @NetworkScope
     internal fun providesCache(context: Context): Cache {
         val httpCacheDirectory = File(context.cacheDir, "http-cache")
         return Cache(httpCacheDirectory, OK_HTTP_CACHE_SIZE)
     }
 
     @Provides
-    @DataScope
+    @NetworkScope
     internal fun providesOkHttpClient(cache: Cache, context: Context): OkHttpClient {
         val logging = HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BODY
@@ -54,7 +54,7 @@ internal class NetworkModule {
     }
 
     @Provides
-    @DataScope
+    @NetworkScope
     internal fun providesRetrofit(
         gson: Gson,
         okHttpClient: OkHttpClient,
