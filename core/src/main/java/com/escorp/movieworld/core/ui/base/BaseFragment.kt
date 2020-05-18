@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
-import com.escorp.movieworld.core.dagger.viewmodel.ViewModelFactory
+import com.escorp.movieworld.core.internal.dagger.factory.ViewModelFactory
 import com.escorp.movieworld.core.ui.feature.recoverable.Recoverable
 import com.escorp.movieworld.core.ui.feature.recoverable.RecoverableDialogFragment
 import com.escorp.movieworld.core.ui.feature.recoverable.RecoverableViewModel
@@ -17,7 +17,7 @@ import com.escorp.movieworld.core.ui.utils.IOnBackPressed
 
 abstract class BaseFragment<VIEW_DATA_BINDING : ViewDataBinding>(
     @LayoutRes private val layoutResId: Int,
-    protected val viewModelFactory: ViewModelFactory
+    protected val viewModelFactory: ViewModelProvider.Factory
 ) : Fragment(), IOnBackPressed {
 
     protected val recoverableViewModel: RecoverableViewModel

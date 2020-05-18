@@ -7,7 +7,7 @@
 
         <variable
                 name="photo"
-                type="com.escorp.movieworld.network.api.dto.common.Image" />
+                type="com.escorp.movieworld.core.data.api.dto.common.Image" />
 
         <variable
                 name="clickListener"

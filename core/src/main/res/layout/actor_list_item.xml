@@ -6,7 +6,7 @@
 
         <variable
                 name="actor"
-                type="com.escorp.movieworld.network.api.dto.actors.Actor" />
+                type="com.escorp.movieworld.core.data.api.dto.actors.Actor" />
 
         <variable
                 name="onClickListener"

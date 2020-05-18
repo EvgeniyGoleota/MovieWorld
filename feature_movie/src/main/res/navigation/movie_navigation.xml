@@ -6,7 +6,7 @@
 
     <fragment
             android:id="@+id/navigation_movie_list"
-            android:name="com.escorp.movieworld.movies.list.ui.MovieListFragment"
+            android:name="com.escorp.movieworld.movies.internal.screen.list.ui.MovieListFragment"
             android:label="Movie World">
         <action
                 android:id="@+id/action_movies_list_to_movie_detail"
@@ -19,7 +19,7 @@
 
     <fragment
             android:id="@+id/navigation_movie_details"
-            android:name="com.escorp.movieworld.movies.details.ui.MovieDetailFragment"
+            android:name="com.escorp.movieworld.movies.internal.screen.details.ui.MovieDetailFragment"
             android:label="{movieName}">
         <argument
                 android:name="movieId"

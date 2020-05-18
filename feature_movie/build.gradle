@@ -51,7 +51,6 @@ android {
 }
 
 dependencies {
-    implementation project(':network')
     implementation project(':core')
 
     implementation appDependencies.kotlinLib

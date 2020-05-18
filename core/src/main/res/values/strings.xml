@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="tmdb_api_key">ed5e7f6f96b248cf13efb41458ee4986</string>
+    <string name="server_address">https://api.themoviedb.org/3/</string>
+
     <string name="all_retry">Retry</string>
     <string name="all_cancel">Cancel</string>
 

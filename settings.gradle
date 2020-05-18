@@ -1,4 +1,4 @@
-include ':app', ':network'
+include ':app'
 include ':core'
 include ':feature_actor'
 include ':feature_movie'

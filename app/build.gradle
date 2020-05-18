@@ -49,7 +49,6 @@ android {
 
 
 dependencies {
-    implementation project(':network')
     implementation project(':core')
     implementation project(':feature_actor')
     implementation project(':feature_movie')

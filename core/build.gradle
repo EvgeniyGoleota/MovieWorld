@@ -31,8 +31,6 @@ android {
 }
 
 dependencies {
-    implementation project(':network')
-
     implementation appDependencies.androidMaterial
     implementation appDependencies.appcompat
     implementation appDependencies.supportRecyclerView
@@ -47,6 +45,13 @@ dependencies {
     implementation appDependencies.daggerAndroid
     kapt appDependencies.daggerCompiler
     kapt appDependencies.daggerProcessor
+
+    implementation appDependencies.gson
+    implementation appDependencies.okHttp
+    implementation appDependencies.okHttpLoggingInterceptor
+    implementation appDependencies.retrofit2
+    implementation appDependencies.retrofit2RxJavaAdapter
+    implementation appDependencies.retrofit2GsonConverter
 
     implementation appDependencies.picasso
 

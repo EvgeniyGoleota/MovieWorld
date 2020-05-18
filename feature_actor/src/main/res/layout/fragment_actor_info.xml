@@ -7,7 +7,7 @@
 
         <variable
                 name="viewModel"
-                type="com.escorp.movieworld.actors.details.ui.info.ActorInfoViewModel" />
+                type="com.escorp.movieworld.actors.internal.screen.details.ui.info.ActorInfoViewModel" />
     </data>
 
     <ScrollView
