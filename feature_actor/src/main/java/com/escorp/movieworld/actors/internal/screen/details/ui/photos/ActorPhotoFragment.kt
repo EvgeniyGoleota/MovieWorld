@@ -35,6 +35,9 @@ internal class ActorPhotoFragment @Inject constructor(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = getViewModel()
+        if (isIdValid(personId)) {
+            viewModel.getPhotos(personId!!)
+        }
     }
 
     override fun FragmentRecyclerViewBinding.onViewCreated(view: View, bundle: Bundle?) {
@@ -49,10 +52,8 @@ internal class ActorPhotoFragment @Inject constructor(
             layoutManager = GridLayoutManager(context, 2)
         }
 
-        if (isIdValid(personId)) {
-            viewModel.getPhotos(personId!!).observeInViewLiveCycle { response ->
-                photoListAdapter.setItems(response)
-            }
+        viewModel.photos.observeInViewLiveCycle { response ->
+            photoListAdapter.setItems(response)
         }
     }
 }

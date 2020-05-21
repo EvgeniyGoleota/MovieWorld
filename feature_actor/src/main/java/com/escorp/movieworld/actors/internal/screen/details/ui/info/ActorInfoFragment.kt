@@ -34,6 +34,7 @@ internal class ActorInfoFragment @Inject constructor(
 
     override fun FragmentActorInfoBinding.onViewCreated(view: View, bundle: Bundle?) {
         viewModel = this@ActorInfoFragment.viewModel
+        lifecycleOwner = this@ActorInfoFragment
 
         if (isIdValid(personId)) this@ActorInfoFragment.viewModel.retrievePersonDetails(personId!!)
     }

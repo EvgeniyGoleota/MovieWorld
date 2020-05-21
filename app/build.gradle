@@ -5,6 +5,11 @@ apply from:   '../dependencies.gradle'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 android {
+    packagingOptions {
+        exclude 'META-INF/LICENSE.md'
+        exclude 'META-INF/LICENSE-notice.md'
+    }
+
     compileSdkVersion 29
     defaultConfig {
         applicationId "com.escorp.movieworld"
@@ -88,9 +93,6 @@ dependencies {
     kapt appDependencies.roomCompiler
 
     // unit test
+    testImplementation project(':test_unit_base')
     testRuntimeOnly testDependencies.junitJupiterEngine
-    testImplementation testDependencies.junitJupiterApi
-    testImplementation testDependencies.kotlinTest
-    testImplementation testDependencies.junitJupiterParams
-    testImplementation testDependencies.nhaarmanMockitoKotlin
 }

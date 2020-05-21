@@ -3,4 +3,7 @@
     <string name="title_movies">Movies</string>
     <string name="title_info">Info</string>
     <string name="title_photos">Photos</string>
+    <string name="avatar">avatar</string>
+    <string name="born">Born:</string>
+    <string name="died">Died:</string>
 </resources>

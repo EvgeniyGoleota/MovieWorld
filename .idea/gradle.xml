@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/feature_actor" />
             <option value="$PROJECT_DIR$/feature_movie" />
+            <option value="$PROJECT_DIR$/test_unit_base" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

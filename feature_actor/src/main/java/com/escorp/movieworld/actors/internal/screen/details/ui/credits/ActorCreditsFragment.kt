@@ -37,6 +37,10 @@ internal class ActorCreditsFragment @Inject constructor(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = getViewModel()
+
+        if (isIdValid(personId)) {
+            viewModel.getPersonsCredits(personId!!)
+        }
     }
 
     override fun FragmentRecyclerViewBinding.onViewCreated(view: View, bundle: Bundle?) {
@@ -53,10 +57,8 @@ internal class ActorCreditsFragment @Inject constructor(
             adapter = creditsListAdapter
         }
 
-        if (isIdValid(personId)) {
-            viewModel.getPersonsCredits(personId!!).observeInViewLiveCycle { list ->
-                if (list.isNotEmpty()) creditsListAdapter.setItems(list)
-            }
+        viewModel.credits.observeInViewLiveCycle { list ->
+            if (list.isNotEmpty()) creditsListAdapter.setItems(list)
         }
     }
 }

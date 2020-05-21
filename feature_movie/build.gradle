@@ -89,9 +89,6 @@ dependencies {
     kapt appDependencies.roomCompiler
 
     // unit test
+    testImplementation project(':test_unit_base')
     testRuntimeOnly testDependencies.junitJupiterEngine
-    testImplementation testDependencies.junitJupiterApi
-    testImplementation testDependencies.kotlinTest
-    testImplementation testDependencies.junitJupiterParams
-    testImplementation testDependencies.nhaarmanMockitoKotlin
 }

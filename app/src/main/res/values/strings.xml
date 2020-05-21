@@ -2,8 +2,6 @@
     <string name="app_name">Movie World</string>
     <string name="title_actors">Actors</string>
     <string name="avatar">avatar</string>
-    <string name="born">Born:</string>
-    <string name="died">Died:</string>
     <string name="cast">Cast</string>
     <string name="similar">Similar</string>
     <string name="poster">poster</string>
