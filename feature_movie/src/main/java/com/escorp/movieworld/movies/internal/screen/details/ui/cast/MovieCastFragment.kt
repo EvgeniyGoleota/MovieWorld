@@ -35,6 +35,9 @@ internal class MovieCastFragment @Inject constructor(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = getViewModel()
+        if (isIdValid(movieId)) {
+            viewModel.getMovieCast(movieId!!)
+        }
     }
 
     override fun FragmentRecyclerViewBinding.onViewCreated(view: View, bundle: Bundle?) {
@@ -50,12 +53,10 @@ internal class MovieCastFragment @Inject constructor(
             adapter = movieCastListAdapter
         }
 
-        if (isIdValid(movieId)) {
-            viewModel.getMovieCast(movieId!!).observeInViewLiveCycle { list ->
-                if (list.isNotEmpty()) {
-                    list.toMutableList().sort()
-                    movieCastListAdapter.setItems(list)
-                }
+        viewModel.movieCast.observeInViewLiveCycle { list ->
+            if (list.isNotEmpty()) {
+                list.toMutableList().sort()
+                movieCastListAdapter.setItems(list)
             }
         }
     }

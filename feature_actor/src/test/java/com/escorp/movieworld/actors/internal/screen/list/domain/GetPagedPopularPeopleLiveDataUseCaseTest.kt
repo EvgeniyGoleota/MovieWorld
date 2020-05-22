@@ -1,6 +1,5 @@
 package com.escorp.movieworld.actors.internal.screen.list.domain
 
-import androidx.paging.PagedList
 import com.escorp.movieworld.core.data.api.dto.actors.Actor
 import com.escorp.movieworld.test_unit_base.AndroidArchComponentExtension
 import com.escorp.movieworld.test_unit_base.RxJavaExtension

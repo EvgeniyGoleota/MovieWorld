@@ -25,21 +25,21 @@ internal class ActorsListViewModelTest {
     private val pagedList = mockPagedList(listOf(actorMock))
     private val compositeDisposableMock = CompositeDisposable()
 
-    private val getPagedPopularPeopleLiveDataUseCase = mock<GetPagedPopularPeopleLiveDataUseCase>()
+    private val getPagedPopularPeopleLiveDataUseCaseMock = mock<GetPagedPopularPeopleLiveDataUseCase>()
 
     private lateinit var actorsListViewModel: ActorsListViewModel
 
     @BeforeEach
     fun setup() {
-        whenever(getPagedPopularPeopleLiveDataUseCase.invoke(any())).thenReturn( MutableLiveData(pagedList))
-        actorsListViewModel = ActorsListViewModel(getPagedPopularPeopleLiveDataUseCase, compositeDisposableMock)
+        whenever(getPagedPopularPeopleLiveDataUseCaseMock.invoke(any())).thenReturn( MutableLiveData(pagedList))
+        actorsListViewModel = ActorsListViewModel(getPagedPopularPeopleLiveDataUseCaseMock, compositeDisposableMock)
     }
 
     @Test
     fun getPopularPeoplePagedListLiveData() {
         actorsListViewModel.popularPeoplePagedListLiveData.test().assertValue { it.size == pagedList.size }
 
-        verify(getPagedPopularPeopleLiveDataUseCase).invoke(compositeDisposableMock)
-        verifyNoMoreInteractions(getPagedPopularPeopleLiveDataUseCase)
+        verify(getPagedPopularPeopleLiveDataUseCaseMock).invoke(compositeDisposableMock)
+        verifyNoMoreInteractions(getPagedPopularPeopleLiveDataUseCaseMock)
     }
 }

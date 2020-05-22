@@ -13,9 +13,6 @@ internal class ActorsListViewModel @Inject constructor(
     compositeDisposable: CompositeDisposable
 ) : ViewModelBase(compositeDisposable) {
 
-    val popularPeoplePagedListLiveData: LiveData<PagedList<Actor>>
-
-    init {
-        popularPeoplePagedListLiveData = getPagedPopularPeopleLiveDataUseCase(compositeDisposable)
-    }
+    val popularPeoplePagedListLiveData: LiveData<PagedList<Actor>> =
+        getPagedPopularPeopleLiveDataUseCase(compositeDisposable)
 }

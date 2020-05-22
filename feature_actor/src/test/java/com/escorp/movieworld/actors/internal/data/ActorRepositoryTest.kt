@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Assertions.*
 
 internal class ActorRepositoryTest {
     private val TEST_PERSON_ID = Int.MAX_VALUE
+
     private val TEST_CREDITS_RESPONSE = mock<CreditsResponse<Movie>>()
     private val TEST_DETAILS_RESPONSE = mock<ActorDetail>()
     private val TEST_PHOTO_RESPONSE = mock<APhotoResponse>()

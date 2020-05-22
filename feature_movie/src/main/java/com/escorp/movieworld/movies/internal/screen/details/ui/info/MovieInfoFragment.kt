@@ -33,6 +33,7 @@ internal class MovieInfoFragment @Inject constructor(
 
     override fun FragmentMovieInfoBinding.onViewCreated(view: View, bundle: Bundle?) {
         viewModel = this@MovieInfoFragment.viewModel
+        lifecycleOwner = this@MovieInfoFragment
         if (isIdValid(movieId)) this@MovieInfoFragment.viewModel.getMovieDetails(movieId!!)
     }
 }
