@@ -91,4 +91,19 @@ dependencies {
     // unit test
     implementation project(':test_unit_base')
     testRuntimeOnly testDependencies.junitJupiterEngine
+
+    // android test
+    androidTestImplementation testDependencies.androidTestCore
+    androidTestImplementation testDependencies.androidTestExt
+    androidTestImplementation testDependencies.espressoCore
+    androidTestImplementation testDependencies.espressoIntents
+    androidTestImplementation testDependencies.espressoContrib
+    androidTestImplementation testDependencies.kotlinTest
+    androidTestImplementation testDependencies.okHttpMockWebserver
+    androidTestImplementation testDependencies.okHttpTls
+    androidTestImplementation testDependencies.rxJavaIdler
+    androidTestImplementation testDependencies.okHttpIdlingResource
+    androidTestImplementation testDependencies.androidTestUiautomator
+    androidTestUtil testDependencies.androidTestOrchestrator
+    kaptAndroidTest appDependencies.databindingCompiler
 }

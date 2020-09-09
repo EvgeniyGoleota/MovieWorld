@@ -20,7 +20,7 @@ internal class ActorListFragment @Inject constructor(
 
     private lateinit var viewModel: ActorsListViewModel
 
-    internal val actorListAdapter = ActorsListAdapter()
+    private val actorListAdapter = ActorsListAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,9 +31,7 @@ internal class ActorListFragment @Inject constructor(
         actorListAdapter.onItemClickListener = object :
             RecyclerViewOnItemClickListener {
             override fun onItemClick(itemId: Int, title: String) {
-                findNavController().navigate(
-                    ActorListFragmentDirections.actionActorsListToActorDetail(itemId, title)
-                )
+                viewModel.openActorDetails(itemId, title)
             }
         }
 

@@ -4,13 +4,15 @@ import androidx.lifecycle.LiveData
 import com.escorp.movieworld.core.ui.base.ViewModelBase
 import com.escorp.movieworld.movies.internal.screen.details.domain.GetMovieCastUseCase
 import com.escorp.movieworld.core.data.api.dto.movies.Cast
+import com.escorp.movieworld.movies.internal.router.MovieRouter
 import io.reactivex.Observable
 import io.reactivex.rxkotlin.ofType
 import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
 internal class MovieCastViewModel @Inject constructor(
-    private val getMovieCastUseCase: GetMovieCastUseCase
+    private val getMovieCastUseCase: GetMovieCastUseCase,
+    private val router: MovieRouter
 ) : ViewModelBase() {
 
     val movieCast: LiveData<List<Cast>>
@@ -42,6 +44,9 @@ internal class MovieCastViewModel @Inject constructor(
     fun getMovieCast(movieId: Int) {
         castSubject.onNext(movieId)
     }
+
+    fun openActorDetails(movieId: Int, movieName: String) =
+        router.actorDetails(movieId, movieName).autoDisposableSubscribe()
 
     sealed class State {
         class Loaded(val cast: List<Cast>): State()

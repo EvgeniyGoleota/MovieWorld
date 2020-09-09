@@ -87,6 +87,7 @@ ext {
 
             // Espresso-only
             androidTestCore        : "androidx.test:core:$androidTestVersion",
+            androidTestExt         : "androidx.test.ext:junit-ktx:1.1.0",
             androidTestOrchestrator: "androidx.test:orchestrator:$androidTestVersion",
             espressoCore           : "androidx.test.espresso:espresso-core:$espressoVersion",
             espressoIntents        : "androidx.test.espresso:espresso-intents:$espressoVersion",

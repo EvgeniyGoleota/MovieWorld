@@ -7,11 +7,12 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.escorp.movieworld.core.router.NavigationControllerHost
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationControllerHost {
 
-    private val navController: NavController by lazy { findNavController(R.id.main_content) }
+    override val navController: NavController by lazy { findNavController(R.id.main_content) }
 
     private lateinit var bottomNavigation: BottomNavigationView
 
@@ -29,10 +30,10 @@ class MainActivity : AppCompatActivity() {
         bottomNavigation.setupWithNavController(navController)
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.navigation_actor_details -> {
+                R.id.actorDetailsFragment -> {
                     hideBottomNavigation()
                 }
-                R.id.navigation_movie_details -> {
+                R.id.movieDetailFragment -> {
                     hideBottomNavigation()
                 }
                 else -> {

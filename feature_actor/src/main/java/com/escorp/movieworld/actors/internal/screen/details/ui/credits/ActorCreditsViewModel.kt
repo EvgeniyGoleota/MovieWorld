@@ -1,15 +1,18 @@
 package com.escorp.movieworld.actors.internal.screen.details.ui.credits
 
 import androidx.lifecycle.LiveData
+import com.escorp.movieworld.actors.internal.router.ActorRouter
 import com.escorp.movieworld.actors.internal.screen.details.domain.GetPersonCreditsUseCase
 import com.escorp.movieworld.core.ui.base.ViewModelBase
 import com.escorp.movieworld.core.data.api.dto.movies.Movie
+import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
 internal class ActorCreditsViewModel @Inject constructor(
-    private val getPersonCreditsUseCase: GetPersonCreditsUseCase
+    private val getPersonCreditsUseCase: GetPersonCreditsUseCase,
+    private val router: ActorRouter
 ) : ViewModelBase() {
 
     val credits: LiveData<List<Movie>>
@@ -46,6 +49,9 @@ internal class ActorCreditsViewModel @Inject constructor(
     fun getPersonsCredits(personId: Int) {
         creditsSubject.onNext(personId)
     }
+
+    fun openMovieDetail(movieId: Int, movieName: String) =
+        router.movieDetails(movieId, movieName).autoDisposableSubscribe()
 
     sealed class State {
         data class Loaded(val credits: List<Movie>): State()
