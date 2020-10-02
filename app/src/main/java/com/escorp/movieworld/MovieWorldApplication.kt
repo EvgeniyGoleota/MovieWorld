@@ -32,7 +32,6 @@ class MovieWorldApplication : Application() {
             .builder()
             .appModule(AppModule(this))
             .build()
-
     }
 
     private fun initActivityLifecycleCallbacks() {
