@@ -30,9 +30,7 @@ internal class MovieListFragment @Inject constructor(
         movieListAdapter.onItemClickListener = object :
             RecyclerViewOnItemClickListener {
             override fun onItemClick(itemId: Int, title: String) {
-                findNavController().navigate(
-                    MovieListFragmentDirections.actionMoviesListToMovieDetail(itemId, title)
-                )
+                viewModel.openMovieDetail(itemId, title)
             }
         }
 

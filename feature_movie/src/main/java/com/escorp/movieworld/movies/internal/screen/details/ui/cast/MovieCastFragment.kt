@@ -1,10 +1,8 @@
 package com.escorp.movieworld.movies.internal.screen.details.ui.cast
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.escorp.movieworld.core.databinding.FragmentRecyclerViewBinding
 import com.escorp.movieworld.core.ui.base.BaseFragment
@@ -27,9 +25,10 @@ internal class MovieCastFragment @Inject constructor(
     private val movieId: Int? by lazy { arguments?.getInt(ID) }
 
     companion object {
-        fun newInstance(movieId: Int, viewModelFactory: ViewModelProvider.Factory) = MovieCastFragment(viewModelFactory).apply {
-            arguments = Bundle().apply { putInt(ID, movieId) }
-        }
+        fun newInstance(movieId: Int, viewModelFactory: ViewModelProvider.Factory) =
+            MovieCastFragment(viewModelFactory).apply {
+                arguments = Bundle().apply { putInt(ID, movieId) }
+            }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,8 +43,7 @@ internal class MovieCastFragment @Inject constructor(
         movieCastListAdapter.onItemClickListener = object :
             RecyclerViewOnItemClickListener {
             override fun onItemClick(itemId: Int, title: String) {
-                val uri = Uri.parse("movieworld://actors/$itemId/$title")
-                findNavController().navigate(uri)
+                viewModel.openActorDetails(itemId, title)
             }
         }
         recyclerView.apply {

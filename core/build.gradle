@@ -45,6 +45,8 @@ dependencies {
     kapt appDependencies.daggerCompiler
     kapt appDependencies.daggerProcessor
 
+    implementation appDependencies.navigationUiKtx
+
     implementation appDependencies.gson
     implementation appDependencies.okHttp
     implementation appDependencies.okHttpLoggingInterceptor

@@ -1,12 +1,11 @@
 package com.escorp.movieworld.actors.internal.screen.details.ui.credits
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.escorp.movieworld.actors.R
+import com.escorp.movieworld.actors.internal.router.ActorRouter
 import com.escorp.movieworld.core.databinding.FragmentRecyclerViewBinding
 import com.escorp.movieworld.core.ui.base.BaseFragment
 import com.escorp.movieworld.core.ui.RecyclerViewOnItemClickListener
@@ -47,8 +46,7 @@ internal class ActorCreditsFragment @Inject constructor(
         creditsListAdapter.onClickListener = object :
             RecyclerViewOnItemClickListener {
             override fun onItemClick(itemId: Int, title: String) {
-                val uri = Uri.parse("movieworld://movies/$itemId/$title")
-                findNavController().navigate(uri)
+                viewModel.openMovieDetail(itemId, title)
             }
 
         }
