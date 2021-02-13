@@ -3,7 +3,6 @@ package com.escorp.movieworld.actors.internal.screen.list.ui
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.escorp.movieworld.actors.R
 import com.escorp.movieworld.core.databinding.FragmentRecyclerViewBinding
