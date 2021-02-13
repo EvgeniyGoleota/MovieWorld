@@ -24,5 +24,4 @@ internal class ActorRepository @Inject constructor(
 
     fun getPopularPeople(page: Int): Single<Response<Actor>> =
         actorsApiClient.getPopularPeople(page)
-
 }
